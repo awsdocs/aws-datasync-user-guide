@@ -1,11 +1,13 @@
-## My Project
+## AWS DataSync User Guide
 
-TODO: Fill this README out!
+AWS DataSync is a secure, online service that automates and accelerates moving data between on-premises and AWS storage services.
 
-Be sure to:
+With this guide, learn how to plan and perform your data migration with the AWS Management Console, AWS CLI, or DataSync API.
 
-* Change the title in this README
-* Edit your repository description on GitHub
+* [What is DataSync?](doc_source/what-is-datasync.md)
+* [How does it work?](doc_source/how-datasync-works.md)
+* [Getting started](doc_source/getting-started.md)
+* [Browse the guide](doc_source/index.md)
 
 ## Security
 

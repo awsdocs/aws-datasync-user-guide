@@ -1,6 +1,6 @@
 # ListTasks<a name="API_ListTasks"></a>
 
-Returns a list of all the tasks\.
+Returns a list of the AWS DataSync tasks you created\.
 
 ## Request Syntax<a name="API_ListTasks_RequestSyntax"></a>
 

@@ -1,6 +1,8 @@
 # LocationFilter<a name="API_LocationFilter"></a>
 
-You can use API filters to narrow down the list of resources returned by `ListLocations`\. For example, to retrieve all your Amazon S3 locations, you can use `ListLocations` with filter name `LocationType S3` and `Operator Equals`\.
+Narrow down the list of resources returned by `ListLocations`\. For example, to see all your Amazon S3 locations, create a filter using `"Name": "LocationType"`, `"Operator": "Equals"`, and `"Values": "S3"`\.
+
+For more information, see [filtering resources](https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html)\.
 
 ## Contents<a name="API_LocationFilter_Contents"></a>
 
@@ -11,7 +13,7 @@ Valid Values:` LocationUri | LocationType | CreationTime`
 Required: Yes
 
  ** Operator **   <a name="DataSync-Type-LocationFilter-Operator"></a>
-The operator that is used to compare filter values \(for example, `Equals` or `Contains`\)\. For more about API filtering operators, see [API filters for ListTasks and ListLocations](https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html)\.  
+The operator that is used to compare filter values \(for example, `Equals` or `Contains`\)\.  
 Type: String  
 Valid Values:` Equals | NotEquals | In | LessThanOrEqual | LessThan | GreaterThanOrEqual | GreaterThan | Contains | NotContains | BeginsWith`   
 Required: Yes

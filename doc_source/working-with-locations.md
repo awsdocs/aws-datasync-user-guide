@@ -1,55 +1,60 @@
-# Working with locations<a name="working-with-locations"></a>
+# Working with AWS DataSync locations<a name="working-with-locations"></a>
 
-In this section, you can find information about how to create and configure locations\. A *location* defines the storage system or service that you want to read data from or write data to\. AWS DataSync supports the following location types:
+A *location* is a storage system or service that AWS DataSync reads from or writes to\. Each DataSync transfer has a source and destination location\.
+
+DataSync supports the following location types:
 + Network File System \(NFS\)
 + Server Message Block \(SMB\)
 + Hadoop Managed File System \(HDFS\)
-+ On\-premises \(self\-managed\) object storage
++ Object storage systems
 + Amazon Elastic File System \(Amazon EFS\)
 + Amazon FSx for Windows File Server
 + Amazon FSx for Lustre
 + Amazon FSx for OpenZFS
++ Amazon FSx for NetApp ONTAP
 + Amazon S3
 
-When you create a task that transfers data between AWS services in different AWS Regions, one of the two locations that you specify must reside in the Region where DataSync is being used\. The other location must be specified in a different Region\.
+Where you can transfer your data depends on the following factors:
++ The source and destination locations involved in the transfer
++ If your locations belong to different AWS accounts
++ The AWS Regions involved in the transfer
 
-You can transfer data between AWS Regions, except for the China Regions and the AWS GovCloud \(US\) Regions\. You can also transfer data between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions\.
+## Supported transfers in the same AWS account<a name="working-with-locations-same-account"></a>
 
-DataSync supports the following source and destination location combinations\. 
-
-**Note**  
-In the following tables, AWS Regions indicates Regions other than the China Regions and the AWS GovCloud \(US\) Regions\. Transfers involving the AWS GovCloud \(US\) Regions can only be between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions\. 
-
-
-| Source \(from\) | Destination \(to\) | 
-| --- | --- | 
-|  Self\-managed storage \(including NFS shares, SMB shares, HDFS, object storage, or NFS on your AWS Snowcone\)  |  Amazon S3 \(in AWS Regions\), Amazon EFS, FSx for Windows File Server, FSx for Lustre, or FSx for OpenZFS  | 
-|  Amazon S3 \(in AWS Regions\), Amazon EFS, FSx for Windows File Server, FSx for Lustre, or FSx for OpenZFS  |  Self\-managed storage \(including NFS shares, SMB shares, HDFS, object storage, or NFS on your AWS Snowcone\)  | 
-|  Amazon S3 \(in AWS Regions\), Amazon EFS, FSx for Windows File Server, FSx for Lustre, or FSx for OpenZFS  |  Amazon S3 \(in AWS Regions\), Amazon EFS, FSx for Windows File Server, FSx for Lustre, or FSx for OpenZFS  | 
-|  Amazon S3 \(in AWS Regions\)  |  Amazon S3 on AWS Outposts  | 
-|  Amazon S3 on AWS Outposts  |  Amazon S3 \(in AWS Regions\)  | 
-
-In addition, you can use the following combinations to transfer data between managed file systems and Amazon S3 buckets in different AWS accounts\. When these kinds of transfers only involve Amazon EFS or supported Amazon FSx file systems, you must use a DataSync agent\.
+DataSync supports transfers between the following locations that belong to the same AWS account\.
 
 
 | Source \(from\) | Destination \(to\) | 
 | --- | --- | 
-|  Amazon EFS \(configured as an NFS location\) or FSx for Windows File Server \(configured as an SMB location\)  |  Amazon S3 \(in AWS Regions\), Amazon EFS, FSx for Windows File Server, FSx for Lustre, or FSx for OpenZFS  | 
-|  Amazon S3 \(in AWS Regions\)  |  Amazon EFS, FSx for Windows File Server, FSx for Lustre, or FSx for OpenZFS  | 
-|  Amazon EFS, FSx for Windows File Server, FSx for Lustre, or FSx for OpenZFS  |  Amazon S3 \(in AWS Regions\)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+
+## Supported transfers across AWS accounts<a name="working-with-locations-across-accounts"></a>
+
+DataSync supports some transfers between storage systems in different AWS accounts\. While typically you don't need a DataSync agent for transfer between AWS services, an agent's required when these kinds of transfers only involve Amazon EFS or Amazon FSx file systems\.
+
+
+| Source \(from\) | Destination \(to\) | 
+| --- | --- | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+|  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)  | 
+
+## Supported transfers in the same AWS Region<a name="working-with-locations-same-region"></a>
+
+There are no restrictions when transferring data within the same AWS Region \(including a Region [disabled by default](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)\)\. For more information, see [AWS Regions supported by DataSync](https://docs.aws.amazon.com/general/latest/gr/datasync.html)\.
+
+## Supported transfers across AWS Regions<a name="working-with-locations-cross-regions"></a>
+
+You can transfer data between [AWS Regions supported by DataSync](https://docs.aws.amazon.com/general/latest/gr/datasync.html) except in the following situations:
++ With AWS GovCloud \(US\) Regions, you can only transfer between AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\)\.
++ You can’t transfer between Regions if one or both of the Regions is [disabled by default](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)\.
+
+When you transfer data between AWS services in different AWS Regions, one of the two locations must be in the Region where you're using DataSync\.
 
 **Important**  
-When you use DataSync to copy files or objects between AWS Regions, you pay for data transfer between Regions\. This transfer is billed as data transfer OUT from your source Region to your destination Region\. For more information, see [Data transfer pricing](http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer)\. 
-
-**Topics**
-+ [Creating a location for NFS](create-nfs-location.md)
-+ [Creating a location for SMB](create-smb-location.md)
-+ [Creating a location for HDFS](create-hdfs-location.md)
-+ [Creating a location for object storage](create-object-location.md)
-+ [Creating a location for Amazon EFS](create-efs-location.md)
-+ [Creating a location for FSx for Windows File Server](create-fsx-location.md)
-+ [Creating a location for FSx for Lustre](create-lustre-location.md)
-+ [Creating a location for FSx for OpenZFS](create-openzfs-location.md)
-+ [Creating a location for Amazon S3](create-s3-location.md)
-+ [How DataSync handles metadata and special files](special-files.md)
-+ [Deleting a location](deleting-location.md)
+You pay for data transferred between AWS Regions\. This transfer is billed as data transfer OUT from the source to destination Region\. For more information, see [Data transfer pricing](http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer)\. 

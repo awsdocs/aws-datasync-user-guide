@@ -2,6 +2,8 @@
 
 You can use API filters to narrow down the list of resources returned by `ListTasks`\. For example, to retrieve all tasks on a source location, you can use `ListTasks` with filter name `LocationId` and `Operator Equals` with the ARN for the location\.
 
+For more information, see [filtering DataSync resources](https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html)\.
+
 ## Contents<a name="API_TaskFilter_Contents"></a>
 
  ** Name **   <a name="DataSync-Type-TaskFilter-Name"></a>
@@ -11,7 +13,7 @@ Valid Values:` LocationId | CreationTime`
 Required: Yes
 
  ** Operator **   <a name="DataSync-Type-TaskFilter-Operator"></a>
-The operator that is used to compare filter values \(for example, `Equals` or `Contains`\)\. For more about API filtering operators, see [API filters for ListTasks and ListLocations](https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html)\.  
+The operator that is used to compare filter values \(for example, `Equals` or `Contains`\)\.  
 Type: String  
 Valid Values:` Equals | NotEquals | In | LessThanOrEqual | LessThan | GreaterThanOrEqual | GreaterThan | Contains | NotContains | BeginsWith`   
 Required: Yes

@@ -64,8 +64,8 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
  ** [LocationUri](#API_DescribeLocationS3_ResponseSyntax) **   <a name="DataSync-DescribeLocationS3-response-LocationUri"></a>
 The URL of the Amazon S3 location that was described\.  
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [S3Config](#API_DescribeLocationS3_ResponseSyntax) **   <a name="DataSync-DescribeLocationS3-response-S3Config"></a>
 The Amazon Resource Name \(ARN\) of the AWS Identity and Access Management \(IAM\) role used to access an Amazon S3 bucket\.  

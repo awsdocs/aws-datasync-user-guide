@@ -1,11 +1,13 @@
 # Deploy your DataSync agent<a name="deploy-agents"></a>
 
-Where you deploy your AWS DataSync agent depends on where you're copying data to and from and whether you're working with on\-premises or in\-cloud storage systems\.
+How you deploy your AWS DataSync agent depends on where you're copying data to and from and whether you're working with on\-premises or in\-cloud storage systems\.
+
+To minimize network latency, deploy your DataSync agent as close as possible to your storage system\. For more information, see [AWS DataSync network requirements](datasync-network.md)\.
 
 **Topics**
 + [Deploy your agent on VMware](#create-vmw-agent)
 + [Deploy your agent on KVM](#create-kvm-agent)
-+ [Deploy your agent on Hyper\-V](#create-hyper-v-agent)
++ [Deploy your agent on Microsoft Hyper\-V](#create-hyper-v-agent)
 + [Deploy your agent as an Amazon EC2 instance](#ec2-deploy-agent)
 + [Deploy your agent on AWS Snowcone](#snowcone-agent)
 + [Deploy your agent on AWS Outposts](#outposts-agent)
@@ -71,9 +73,9 @@ You can change the password on the local console\. You don't need to log in to t
 
 After you deploy an agent, you [choose a service endpoint](choose-service-endpoint.md)\.
 
-## Deploy your agent on Hyper\-V<a name="create-hyper-v-agent"></a>
+## Deploy your agent on Microsoft Hyper\-V<a name="create-hyper-v-agent"></a>
 
-You can download and deploy an AWS DataSync agent in your Hyper\-V environment and then activate it\. You can also use an existing agent instead of deploying a new one\. You can use a previously created agent if it can access your self\-managed storage and if it's activated in the same AWS Region\.
+You can download and deploy an AWS DataSync agent in your Microsoft Hyper\-V environment and then activate it\. You can also use an existing agent instead of deploying a new one\. You can use a previously created agent if it can access your self\-managed storage and if it's activated in the same AWS Region\.
 
 **To deploy an agent on Hyper\-V**
 
@@ -99,7 +101,7 @@ After you deploy an agent, you [choose a service endpoint](choose-service-endpoi
 You deploy a DataSync agent as an Amazon EC2 instance when copying data between:
 + A self\-managed, in\-cloud storage system and an AWS storage service\. 
 
-  For more information about these use cases, including high\-level architecture diagrams, see [Deploying your DataSync agent in AWS Regions](using-ec2-agent-in-region.md)\. 
+  For more information about these use cases, including high\-level architecture diagrams, see [Deploying your DataSync agent in an AWS Region](using-ec2-agent-in-region.md)\. 
 + [Amazon S3 on AWS Outposts](#outposts-agent) and an AWS storage service\.
 
 **Warning**  
@@ -109,7 +111,7 @@ We don't recommend using an Amazon EC2 agent to access your on\-premises storage
 + Use the following CLI command to get the latest DataSync Amazon Machine Image \(AMI\) ID for the specified AWS Region\.
 
   ```
-  aws ssm get-parameter --name /aws/service/datasync/ami --region $region
+  aws ssm get-parameter --name /aws/service/datasync/ami --region region
   ```  
 **Example command and output**  
 
@@ -126,24 +128,20 @@ We don't recommend using an Amazon EC2 agent to access your on\-premises storage
           "ARN": "arn:aws:ssm:us-east-1::parameter/aws/service/datasync/ami"
       }
   }
-  ```
-
-  For the recommended instance types, see [Amazon EC2 instance requirements](agent-requirements.md#ec2-instance-types)\. 
-
-  If you activate an agent in the Region that has access to your file system using a mount target in the same Availability Zone and you want to use that agent, choose the agent and select choose **Create agent**\. The [Configure a source location](configure-source-location.md) page appears\. <a name="efs-efs-steps"></a>
+  ```<a name="efs-efs-steps"></a>
 
 **To deploy your DataSync agent as an Amazon EC2 instance**
 **Important**  
 To avoid charges, deploy your agent in a way that it doesn't require network traffic between Availability Zones\. For example, deploy your agent in the Availability Zone where your self\-managed file system resides\.  
 To learn more about data transfer prices for all AWS Regions, see [Amazon EC2 On\-Demand pricing](http://aws.amazon.com/ec2/pricing/on-demand/)\. 
 
-1. From the AWS account where the source file system resides, launch the agent using your AMI from the Amazon EC2 launch wizard\. Use the following URL to launch the AMI\.
+1. From the AWS account where the source file system resides, launch the agent by using your AMI from the Amazon EC2 launch wizard\. Use the following URL to launch the AMI\.
 
    ```
    https://console.aws.amazon.com/ec2/v2/home?region=source-file-system-region#LaunchInstanceWizard:ami=ami-id
    ```
 
-   In the URL, replace the` source-file-system-region` and `ami-id` with your own source AWS Region and AMI ID\. The **Choose an Instance Type** page appears on the Amazon EC2 console\. To find the DataSync AMI ID for a specified AWS Region, use the [.AMI-command](#AMI-command) CLI command described in the preceding section\.
+   In the URL, replace the `source-file-system-region` and `ami-id` with your own source AWS Region and AMI ID\. The **Choose an Instance Type** page appears on the Amazon EC2 console\.
 
 1. Choose one of the recommended instance types for your use case, and choose ****Next**: Configure Instance Details**\. For the recommended instance types, see [Amazon EC2 instance requirements](agent-requirements.md#ec2-instance-types)\.
 
@@ -151,7 +149,7 @@ To learn more about data transfer prices for all AWS Regions, see [Amazon EC2 On
 
    1. For **Network**, choose the virtual private cloud \(VPC\) where your source Amazon EFS or NFS file system is located\.
 
-   1. For **Auto\-assign Public IP**, choose a value\. For your instance to be accessible from the public internet, set **Auto\-assign Public IP** to **Enable**\. Otherwise, set** Auto\-assign Public IP** to **Disable**\. If a public IP address isn't assigned, activate the agent in your VPC using its private IP address\.
+   1. For **Auto\-assign Public IP**, choose a value\. For your instance to be accessible from the public internet, set **Auto\-assign Public IP** to **Enable**\. Otherwise, set **Auto\-assign Public IP** to **Disable**\. If a public IP address isn't assigned, activate the agent in your VPC by using its private IP address\.
 
       When you transfer files from an in\-cloud file system, to increase performance we recommend that you choose a **Placement Group** value where your NFS server resides\.
 
@@ -163,9 +161,9 @@ To learn more about data transfer prices for all AWS Regions, see [Amazon EC2 On
 
    1. Make sure that the selected security group allows inbound access to HTTP port 80 from the web browser that you plan to use to activate the agent\.
 
-   1. Make sure that the security group of the source file system allows inbound traffic from the agent\. In addition, make sure that the agent allows outbound traffic to the source file system\. If you deploy your agent using a VPC endpoint, you need to allow additional ports\. For more information, see [How DataSync works with VPC endpoints ](datasync-in-vpc.md#working-with-endpoints)\.
+   1. Make sure that the security group of the source file system allows inbound traffic from the agent\. In addition, make sure that the agent allows outbound traffic to the source file system\. If you deploy your agent by using a VPC endpoint, you need to allow additional ports\. For more information, see [How DataSync works with VPC endpoints ](datasync-in-vpc.md#working-with-endpoints)\.
 
-   For the complete set of network requirements for DataSync, see [Network requirements](datasync-network.md)\.
+   For the complete set of network requirements for DataSync, see [AWS DataSync network requirements](datasync-network.md)\.
 
 1. Choose **Review and Launch** to review your configuration, then choose **Launch** to launch your instance\. Remember to use a key pair that's accessible to you\. A confirmation page appears and indicates that your instance is launching\.
 
@@ -183,6 +181,6 @@ The DataSync agent AMI is pre\-installed on your Snowcone device\. Launch the ag
 
 ## Deploy your agent on AWS Outposts<a name="outposts-agent"></a>
 
-You can launch a DataSync Amazon EC2 instance on your AWS Outpost\. To learn more about launching an AMI on AWS Outposts, see [Launch an instance on your Outpost](https://docs.aws.amazon.com/outposts/latest/userguide/launch-instance.html) in the *AWS Outposts User Guide*\. 
+You can launch a DataSync Amazon EC2 instance on your Outpost\. To learn more about launching an AMI on AWS Outposts, see [Launch an instance on your Outpost](https://docs.aws.amazon.com/outposts/latest/userguide/launch-instance.html) in the *AWS Outposts User Guide*\. 
 
-When using DataSync to access Amazon S3 on Outposts, you must launch the agent in a VPC that's allowed to access your Amazon S3 access point, and activate the agent in the Outpost's parent Region\. The agent must also be able to route to the Amazon S3 on Outposts endpoint for the bucket\. To learn more about working with Amazon S3 on Outposts endpoints, see [Working with Amazon S3 on Outposts](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html#AccessingS3Outposts) in the *Amazon S3 User Guide*\.
+When using DataSync to access Amazon S3 on Outposts, you must launch the agent in a VPC that's allowed to access your Amazon S3 access point, and activate the agent in the parent Region of the Outpost\. The agent must also be able to route to the Amazon S3 on Outposts endpoint for the bucket\. To learn more about working with Amazon S3 on Outposts endpoints, see [Working with Amazon S3 on Outposts](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html#AccessingS3Outposts) in the *Amazon S3 User Guide*\.

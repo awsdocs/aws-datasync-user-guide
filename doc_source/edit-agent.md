@@ -8,11 +8,8 @@ You can get detailed information about your agent and edit the agent's propertie
 
 1. In the left navigation pane, choose **Agent** to open the **Agents** page\.
 
-1. In the **Agent ID** column, choose the agent that you want to edit\. The agent's **Details** page opens\. For agents that are activated with a private virtual private cloud \(VPC\) endpoint, details about the VPC endpoint appear on this page\.  
-  
-  
+1. In the **Agent ID** column, choose the agent that you want to edit\.
 
-
-1. Choose **Edit**, and make the changes that you want\. 
+1. Choose **Edit** and make the changes that you want\.
 **Note**  
-You can't change the agent type after creating an agent\.
+You can't change the agent type\.

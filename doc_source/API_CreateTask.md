@@ -1,15 +1,14 @@
 # CreateTask<a name="API_CreateTask"></a>
 
-Creates a task\.
+Configures a task, which defines where and how AWS DataSync transfers your data\.
 
-A task includes a source location and a destination location, and a configuration that specifies how data is transferred\. A task always transfers data from the source location to the destination location\. The configuration specifies options such as task scheduling, bandwidth limits, etc\. A task is the complete definition of a data transfer\.
+A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data \(such as bandwidth limits, scheduling, among other options\)\.
 
-When you create a task that transfers data between AWS services in different AWS Regions, one of the two locations that you specify must reside in the Region where DataSync is being used\. The other location must be specified in a different Region\.
+When you create a task that transfers data between AWS services in different AWS Regions, one of your locations must reside in the Region where you're using DataSync\.
 
-You can transfer data between commercial AWS Regions except for China, or between AWS GovCloud \(US\) Regions\.
-
-**Important**  
-When you use DataSync to copy files or objects between AWS Regions, you pay for data transfer between Regions\. This is billed as data transfer OUT from your source Region to your destination Region\. For more information, see [Data Transfer pricing](http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer)\. 
+For more information, see the following topics:
++  [Working with DataSync locations](https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html) 
++  [Configure DataSync task settings](https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html) 
 
 ## Request Syntax<a name="API_CreateTask_RequestSyntax"></a>
 
@@ -36,6 +35,7 @@ When you use DataSync to copy files or objects between AWS Regions, you pay for 
       "Gid": "string",
       "LogLevel": "string",
       "Mtime": "string",
+      "ObjectTags": "string",
       "OverwriteMode": "string",
       "PosixPermissions": "string",
       "PreserveDeletedFiles": "string",

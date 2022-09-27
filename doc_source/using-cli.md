@@ -17,13 +17,13 @@ To see the parameters associated with a specific operation, enter the following 
 For more information about the AWS CLI, see [What is the AWS Command Line Interface?](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 
 **Topics**
-+ [Creating an agent](create-agent-cli.md)
-+ [Creating locations](create-locations-cli.md)
-+ [Creating a task](create-task-cli.md)
-+ [Starting a task](start-task-execution.md)
-+ [Monitoring your task](monitor-task-execution.md)
-+ [API filters for ListTasks and ListLocations](query-resources.md)
++ [Creating an AWS DataSync agent with the AWS CLI](create-agent-cli.md)
++ [Creating AWS DataSync locations with the AWS CLI](create-locations-cli.md)
++ [Creating an AWS DataSync task with the AWS CLI](create-task-cli.md)
++ [Starting an AWS DataSync task with the AWS CLI](start-task-execution.md)
++ [Monitoring your AWS DataSync task with the AWS CLI](monitor-task-execution.md)
++ [Filtering AWS DataSync resources](query-resources.md)
 
-For information about supported AWS Regions and endpoints, see [DataSync AWS Regions and endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#datasync-region)\.
+For information about supported AWS Regions and endpoints, see [AWS DataSync endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/datasync.html)\.
 
-For information about DataSync Amazon Resource Name \(ARN\) values, see [DataSync Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-datasync)\.
+For information about DataSync Amazon Resource Name \(ARN\) values, see [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-datasync)\.

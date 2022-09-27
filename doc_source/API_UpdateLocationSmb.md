@@ -36,7 +36,7 @@ Required: No
 The name of the Windows domain that the SMB server belongs to\.  
 Type: String  
 Length Constraints: Maximum length of 253\.  
-Pattern: `^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$`   
+Pattern: `^[A-Za-z0-9]((\.|-+)?[A-Za-z0-9]){0,252}$`   
 Required: No
 
  ** [LocationArn](#API_UpdateLocationSmb_RequestSyntax) **   <a name="DataSync-UpdateLocationSmb-request-LocationArn"></a>
@@ -47,7 +47,7 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
 Required: Yes
 
  ** [MountOptions](#API_UpdateLocationSmb_RequestSyntax) **   <a name="DataSync-UpdateLocationSmb-request-MountOptions"></a>
-Represents the mount options that are available for DataSync to access an SMB location\.  
+Specifies how DataSync can access a location using the SMB protocol\.  
 Type: [SmbMountOptions](API_SmbMountOptions.md) object  
 Required: No
 

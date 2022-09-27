@@ -1,6 +1,9 @@
 # CreateLocationFsxOpenZfs<a name="API_CreateLocationFsxOpenZfs"></a>
 
-Creates an endpoint for an Amazon FSx for OpenZFS file system\.
+Creates an endpoint for an Amazon FSx for OpenZFS file system that AWS DataSync can access for a transfer\. For more information, see [Creating a location for FSx for OpenZFS](https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html)\.
+
+**Note**  
+Request parameters related to `SMB` aren't supported with the `CreateLocationFsxOpenZfs` operation\.
 
 ## Request Syntax<a name="API_CreateLocationFsxOpenZfs_RequestSyntax"></a>
 
@@ -12,6 +15,14 @@ Creates an endpoint for an Amazon FSx for OpenZFS file system\.
          "MountOptions": { 
             "Version": "string"
          }
+      },
+      "SMB": { 
+         "Domain": "string",
+         "MountOptions": { 
+            "Version": "string"
+         },
+         "Password": "string",
+         "User": "string"
       }
    },
    "SecurityGroupArns": [ "string" ],

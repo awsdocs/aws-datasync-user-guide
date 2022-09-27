@@ -6,6 +6,12 @@ To get notified about updates to this documentation, subscribe to the RSS feed\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Public preview release of AWS DataSync Discovery](https://docs.aws.amazon.com/datasync/latest/userguide/understanding-your-storage.html) | Use DataSync Discovery to help accelerate your migration to AWS\. | September 21, 2022 | 
+| [New option for migrating data to or from Google Cloud Storage](https://docs.aws.amazon.com/datasync/latest/userguide/tutorial_transfer-google-cloud-storage.html) | You can transfer data to or from Google Cloud Storage by deploying an AWS DataSync agent in Google Cloud\. | July 21, 2022 | 
+| [Support for Amazon FSx for NetApp ONTAP file systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html) | AWS DataSync can now transfer files and folders to and from FSx for ONTAP file systems\. | June 28, 2022 | 
+| [New security options for Amazon EFS locations](https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html) | AWS DataSync can access Amazon EFS file systems using TLS, access points, and IAM roles\. | May 31, 2022 | 
+| [Migrating data to or from Google Cloud Storage and Azure Files](#doc-history) | With AWS DataSync, you can transfer data to or from Google Cloud Storage and Azure Files\. For more information, see [Creating a location for object storage](https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html) and [Creating a location for SMB](https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html)\. | May 24, 2022 | 
+| [New AWS DataSync task setting](https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html) | With the **Copy object tags** option, you can specify whether to maintain object tags when transferring between object storage systems\. | May 5, 2022 | 
 | [New AWS Region](https://docs.aws.amazon.com/general/latest/gr/datasync.html) | AWS DataSync is now available in the Asia Pacific \(Jakarta\) Region\. | April 19, 2022 | 
 | [Support for Amazon FSx for OpenZFS file systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html) | AWS DataSync can now transfer files and folders to and from FSx for OpenZFS file systems\. | April 5, 2022 | 
 | [Support for Amazon FSx for Lustre file systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-lustre-location.html) | AWS DataSync can now transfer files and folders to and from FSx for Lustre file systems\. | December 10, 2021 | 

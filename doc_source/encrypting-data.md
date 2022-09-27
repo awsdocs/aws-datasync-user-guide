@@ -18,9 +18,10 @@ You can't manage the encryption keys that DataSync uses to store information in 
 
 Though DataSync doesn’t control how your storage data is encrypted at rest, we still recommend configuring your locations with the highest level of security that they support\. For example, you can encrypt objects with Amazon S3 managed encryption keys \(SSE\-S3\) or AWS Key Management Service \(AWS KMS\) keys \(SSE\-KMS\)\.
 
-Learn more about how AWS storage services manage reading and writing encrypted data:
-+ [Amazon S3 default encryption for S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html)
-+ [Amazon EFS file system encryption of data at rest](https://docs.aws.amazon.com/efs/latest/ug/encryption.html)
-+ [Amazon FSx for Windows File Server encryption of data at rest](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/encryption-at-rest.html)
-+ [Amazon FSx for Lustre encryption of data at rest](https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-at-rest.html)
-+ [Amazon FSx for OpenZFS encryption of data at rest](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/encryption-rest.html)
+Learn more about how AWS storage services encrypt data at rest:
++ [Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/encryption-at-rest.html)
++ [Amazon FSx for Windows File Server](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/encryption-at-rest.html)
++ [Amazon FSx for Lustre](https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-at-rest.html)
++ [Amazon FSx for OpenZFS](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/encryption-rest.html)
++ [Amazon FSx for NetApp ONTAP](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/encryption-at-rest.html)
++ [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html)

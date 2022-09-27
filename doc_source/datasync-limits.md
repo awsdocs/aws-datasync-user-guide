@@ -1,27 +1,54 @@
-# AWS DataSync quotas and limits<a name="datasync-limits"></a>
+# AWS DataSync quotas<a name="datasync-limits"></a>
 
-Following, you can find information on AWS DataSync resources and their quotas and limits\.
+Find out about quotas when working with AWS DataSync\.
 
-**Topics**
-+ [Quotas for tasks](#task-hard-limits)
-+ [Quotas for task executions](#task-execution-retention)
-+ [Limits for DataSync file systems](#file-system-limits)
-+ [Limits for DataSync filters](#filter-limits)
+## Storage system quotas<a name="file-system-limits"></a>
 
-## Quotas for tasks<a name="task-hard-limits"></a>
+DataSync has quotas when working with storage system files and objects\.
 
-Following are the quotas on tasks for each customer account in an AWS Region\.
+
+| Description | Limit | 
+| --- | --- | 
+|  Maximum total file path length  |  4,096 bytes  | 
+|  Maximum file path component \(file name, directory, or subdirectory\) length  |  255 bytes  | 
+|  Maximum length of Windows domain  |  253 characters  | 
+|  Maximum length of server hostname  |  255 characters  | 
+|  Maximum Amazon S3 object name length  |  1,024 UTF\-8 characters  | 
+
+## Task quotas<a name="task-hard-limits"></a>
+
+These are the quotas on DataSync tasks for each AWS account in an AWS Region\.
 
 
 | Resource | Quota | Can quota be increased? | 
 | --- | --- | --- | 
-|  Maximum number of tasks you can create in account per AWS Region  |  100  |  Yes  | 
-|  Maximum number of files per task, when transferring data between self\-managed storage and AWS services  |  50 million  For tasks that transfer more than 20 million files, make sure that you allocate a minimum of 64 GB of RAM to the virtual machine \(VM\)\. For minimum resource requirements for DataSync, see [Virtual machine requirements](agent-requirements.md#hardware)\.   |  Yes  As an alternative to requesting an increase, you can create tasks on different subdirectories using include/exclude filters\. For more information about using filters, see [Filtering the data transferred by AWS DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)\.    | 
-|  Maximum number of files per task, when transferring data between AWS storage services  |  25 million  |  Yes  As an alternative to requesting an increase, you can create tasks on different subdirectories using include/exclude filters\. For more information about using filters, see [Filtering the data transferred by AWS DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)\.    | 
-|  Maximum number of files per task, when running DataSync on an AWS Snowcone device  |  200,000  |  No  | 
+|  Maximum number of tasks you can create  |  100  |  Yes  | 
+|  Maximum number of files or objects per task when transferring data between self\-managed storage and AWS services  |  50 million  For tasks that transfer more than 20 million files or objects, make sure that you allocate a minimum of 64 GB of RAM to the virtual machine \(VM\)\. For minimum resource requirements for DataSync, see [Virtual machine requirements](agent-requirements.md#hardware)\.   |  Yes  As an alternative to requesting an increase, you can create tasks on different subdirectories using include and exclude filters\. For more information about using filters, see [Filtering the data transferred by AWS DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)\.    | 
+|  Maximum number of files or objects per task when transferring data between AWS storage services  |  25 million  |  Yes  As an alternative to requesting an increase, you can create tasks on different subdirectories using include/exclude filters\. For more information about using filters, see [Filtering the data transferred by AWS DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)\.    | 
+|  Maximum number of files per task when running DataSync on an AWS Snowcone device  |  200,000  |  No  | 
 |  Maximum throughput per task  |  10 Gbps  |  No  | 
 
-You can take the following steps to request an increase for the permitted quotas\. These increases are not granted right away, so it might take a couple of days for your increase to take effect\.
+## Task filter quotas<a name="filter-limits"></a>
+
+DataSync has quotas on how you can filter data in a task\.
+
+
+| Filter | Limit | 
+| --- | --- | 
+|  Maximum number of characters you can include in a task filter  |  102,400 characters  If you're using the AWS Management Console, this limit includes all the characters combined in your include and exclude patterns\.   | 
+
+## Task execution quotas<a name="task-execution-retention"></a>
+
+These are the quotas on DataSync task executions for each AWS account in an AWS Region\.
+
+
+| Resource | Quota | 
+| --- | --- | 
+|  Number of days a task execution's history is retained  |  30  | 
+
+## Request a quota increase<a name="request-quota-increase"></a>
+
+You can request an increase for some DataSync quotas\. Increases aren't granted right away and might take a couple of days to take effect\.
 
 **To request a quota increase**
 
@@ -36,36 +63,3 @@ You can take the following steps to request an increase for the permitted quotas
 1. Fill in the case description, and then choose your preferred method of contact\.
 
    If you need to increase a different quota, fill out a separate request\. 
-
-## Quotas for task executions<a name="task-execution-retention"></a>
-
-Following are the quotas on task executions for each customer account in an AWS Region\.
-
-
-| Resource | Quota | 
-| --- | --- | 
-|  Number of days task execution history is retained  |  30  | 
-
-## Limits for DataSync file systems<a name="file-system-limits"></a>
-
-The following table lists file system limits for DataSync\. 
-
-If the storage systems at the source and destination locations have higher limits on the lengths of the total path and path components \(file names, directories, and subdirectories\), DataSync might not be able to access some objects on those systems\. 
-
-
-| Description | Limit | 
-| --- | --- | 
-|  Maximum total file path length  |  4096 bytes  | 
-|  Maximum file path component \(file name, directory, or subdirectory\) length  |  255 bytes  | 
-|  Maximum length of Windows domain  |  253 characters  | 
-|  Maximum length of server hostname  |  255 characters  | 
-|  Maximum Amazon S3 object name length  |  1024 UTF\-8 characters  | 
-
-## Limits for DataSync filters<a name="filter-limits"></a>
-
-Following are the limits on DataSync filters per task or task execution\.
-
-
-| Filter | Limit | 
-| --- | --- | 
-|  Maximum number of characters in a filter string  |  409,600  | 

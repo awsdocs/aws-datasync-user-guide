@@ -58,8 +58,8 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
  ** [LocationUri](#API_DescribeLocationNfs_ResponseSyntax) **   <a name="DataSync-DescribeLocationNfs-response-LocationUri"></a>
 The URL of the source NFS location that was described\.  
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [MountOptions](#API_DescribeLocationNfs_ResponseSyntax) **   <a name="DataSync-DescribeLocationNfs-response-MountOptions"></a>
 The NFS mount options that DataSync used to mount your NFS share\.  

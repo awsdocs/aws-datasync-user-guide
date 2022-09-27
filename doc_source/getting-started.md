@@ -10,11 +10,9 @@ Before you begin, we recommend reading [How AWS DataSync works](how-datasync-wor
 
 1. In the upper\-right corner, select the AWS Region where you want to run DataSync\.
 
-   We recommend choosing the AWS Region where the Amazon S3 bucket, Amazon EFS file system, Amazon FSx for Windows File Server file system, Amazon FSx for Lustre file system, or Amazon FSx for OpenZFS file system involved in your transfer resides\. 
+   We recommend choosing the AWS Region where the AWS storage resource that's involved in your transfer resides\. For a list of AWS storage services that DataSync supports, see [Working with AWS DataSync locations](working-with-locations.md)\.
 
-   If you haven't created DataSync resources in this AWS Region before, the DataSync home page appears\.
-
-1. On the DataSync home page, select whether to create the data transfer task **Between on\-premises storage and AWS** or **Between AWS Storage services**\.
+1. On the DataSync home page, choose whether to transfer data **Between on\-premises storage and AWS** or **Between AWS Storage services**\.
 
 1. Choose **Get started** to begin using DataSync\. 
 
@@ -25,7 +23,7 @@ Before you begin, we recommend reading [How AWS DataSync works](how-datasync-wor
 Next, take the following steps\.
 
 **Topics**
-+ [Create an agent](configure-agent.md)
++ [Create an AWS DataSync agent](configure-agent.md)
 + [Configure a source location](configure-source-location.md)
 + [Configure a destination location](create-destination-location.md)
 + [Configure task settings](create-task.md)

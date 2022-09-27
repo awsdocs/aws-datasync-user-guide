@@ -26,6 +26,7 @@ Updates the metadata associated with a task\.
       "Gid": "string",
       "LogLevel": "string",
       "Mtime": "string",
+      "ObjectTags": "string",
       "OverwriteMode": "string",
       "PosixPermissions": "string",
       "PreserveDeletedFiles": "string",

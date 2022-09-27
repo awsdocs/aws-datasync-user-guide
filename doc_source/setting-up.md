@@ -27,7 +27,7 @@ For a list of AWS Regions and endpoints that DataSync supports, see [AWS DataSyn
 ## How can I use DataSync?<a name="datasync-access"></a>
 
 There are several ways to use DataSync:
-+ [DataSync console](http://console.aws.amazon.com/datasync/home), which is part of the AWS Management Console\.
++ [DataSync console](https://console.aws.amazon.com/datasync/home), which is part of the AWS Management Console\.
 + [DataSync API](API_Reference.md) or the [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/datasync/index.html#cli-aws-datasync) to programmatically configure and manage DataSync\.
 + [AWS SDKs](http://aws.amazon.com/code) to build applications that use DataSync\.
 

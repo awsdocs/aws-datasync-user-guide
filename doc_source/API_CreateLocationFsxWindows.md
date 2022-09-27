@@ -28,28 +28,31 @@ For information about the parameters that are common to all actions, see [Common
 The request accepts the following data in JSON format\.
 
  ** [Domain](#API_CreateLocationFsxWindows_RequestSyntax) **   <a name="DataSync-CreateLocationFsxWindows-request-Domain"></a>
-The name of the Windows domain that the FSx for Windows File Server belongs to\.  
+Specifies the name of the Windows domain that the FSx for Windows File Server belongs to\.  
 Type: String  
 Length Constraints: Maximum length of 253\.  
-Pattern: `^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$`   
+Pattern: `^[A-Za-z0-9]((\.|-+)?[A-Za-z0-9]){0,252}$`   
 Required: No
 
  ** [FsxFilesystemArn](#API_CreateLocationFsxWindows_RequestSyntax) **   <a name="DataSync-CreateLocationFsxWindows-request-FsxFilesystemArn"></a>
-The Amazon Resource Name \(ARN\) for the FSx for Windows File Server file system\.  
+Specifies the Amazon Resource Name \(ARN\) for the FSx for Windows File Server file system\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$`   
 Required: Yes
 
  ** [Password](#API_CreateLocationFsxWindows_RequestSyntax) **   <a name="DataSync-CreateLocationFsxWindows-request-Password"></a>
-The password of the user who has the permissions to access files and folders in the FSx for Windows File Server file system\.  
+Specifies the password of the user who has the permissions to access files and folders in the file system\.  
 Type: String  
 Length Constraints: Maximum length of 104\.  
 Pattern: `^.{0,104}$`   
 Required: Yes
 
  ** [SecurityGroupArns](#API_CreateLocationFsxWindows_RequestSyntax) **   <a name="DataSync-CreateLocationFsxWindows-request-SecurityGroupArns"></a>
-The ARNs of the security groups that are used to configure the FSx for Windows File Server file system\.  
+Specifies the ARNs of the security groups that provide access to your file system's preferred subnet\.  
+If you choose a security group that doesn't allow connections from within itself, do one of the following:  
++ Configure the security group to allow it to communicate within itself\.
++ Choose a different security group that can communicate with the mount target's security group\.
 Type: Array of strings  
 Array Members: Minimum number of 1 item\. Maximum number of 5 items\.  
 Length Constraints: Maximum length of 128\.  
@@ -57,20 +60,20 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{1
 Required: Yes
 
  ** [Subdirectory](#API_CreateLocationFsxWindows_RequestSyntax) **   <a name="DataSync-CreateLocationFsxWindows-request-Subdirectory"></a>
-A subdirectory in the location's path\. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination\.  
+Specifies a mount path for your file system using forward slashes\. This is where DataSync reads or writes data \(depending on if this is a source or destination location\)\.  
 Type: String  
 Length Constraints: Maximum length of 4096\.  
 Pattern: `^[a-zA-Z0-9_\-\+\./\(\)\$\p{Zs}]+$`   
 Required: No
 
  ** [Tags](#API_CreateLocationFsxWindows_RequestSyntax) **   <a name="DataSync-CreateLocationFsxWindows-request-Tags"></a>
-The key\-value pair that represents a tag that you want to add to the resource\. The value can be an empty string\. This value helps you manage, filter, and search for your resources\. We recommend that you create a name tag for your location\.  
+Specifies labels that help you categorize, filter, and search for your AWS resources\. We recommend creating at least a name tag for your location\.  
 Type: Array of [TagListEntry](API_TagListEntry.md) objects  
 Array Members: Minimum number of 0 items\. Maximum number of 50 items\.  
 Required: No
 
  ** [User](#API_CreateLocationFsxWindows_RequestSyntax) **   <a name="DataSync-CreateLocationFsxWindows-request-User"></a>
-The user who has the permissions to access files and folders in the FSx for Windows File Server file system\.  
+Specifies the user who has the permissions to access files and folders in the file system\.  
 For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see [user](create-fsx-location.html#FSxWuser)\.  
 Type: String  
 Length Constraints: Maximum length of 104\.  
@@ -92,7 +95,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [LocationArn](#API_CreateLocationFsxWindows_ResponseSyntax) **   <a name="DataSync-CreateLocationFsxWindows-response-LocationArn"></a>
-The Amazon Resource Name \(ARN\) of the FSx for Windows File Server file system location you created\.  
+The ARN of the FSx for Windows File Server file system location you created\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$` 

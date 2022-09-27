@@ -2,7 +2,7 @@
 
 Your storage data \(including metadata\) is encrypted in transit, but how it's encrypted throughout the transfer depends on your source and destination locations\.
 
-When connecting with a location, DataSync uses the most secure options provided by that location's data access protocol\. For example, when connecting with a Server Message Block \(SMB\) file system, DataSync uses the security features provided by SMB\.
+When connecting with a location, DataSync uses the most secure options provided by that location's data access protocol\. For example, when connecting with a file system using Server Message Block \(SMB\), DataSync uses the security features provided by SMB\.
 
 ## Network connections in a transfer<a name="understanding-network-connections-in-transit"></a>
 
@@ -15,9 +15,17 @@ The following diagram is an example of the network connections that DataSync use
 
 | Reference | Network connection | Description | 
 | --- | --- | --- | 
-| 1 | Reading data from the source location | DataSync connects by using the storage system's protocol for accessing data \(for example, SMB or the Amazon S3 API\)\. For this connection, data is protected by using the security features of the storage system's protocol\. | 
+| 1 | Reading data from the source location | DataSync connects by using the storage system's protocol for accessing data \(for example, SMB or the Amazon S3 API\)\. For this connection, data is protected by using the security features of the storage system\. | 
 | 2 | Transferring data between locations | For this connection, DataSync encrypts all network traffic with Transport Layer Security \(TLS\) 1\.2\. | 
-| 3 | Writing data to the destination location | Like it did with the source location, DataSync connects by using the storage system's protocol for accessing data\. Data is again protected by using the security features of the storage system's protocol\. | 
+| 3 | Writing data to the destination location | Like it did with the source location, DataSync connects by using the storage system's protocol for accessing data\. Data is again protected by using the security features of the storage system\. | 
+
+Learn how your data is encrypted in transit when DataSync connects to the following AWS storage services:
++ [Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html)
++ [Amazon FSx for Windows File Server](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/encryption-in-transit.html)
++ [Amazon FSx for Lustre](https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html)
++ [Amazon FSx for OpenZFS](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/encryption-transit.html)
++ [Amazon FSx for NetApp ONTAP](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/encryption-in-transit.html)
++ [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html)
 
 ## TLS ciphers<a name="tls-ciphers-in-transit"></a>
 

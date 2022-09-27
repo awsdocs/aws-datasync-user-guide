@@ -19,8 +19,8 @@ GLOBAL\_ID is the globally unique identifier of the resource that backs the loca
 SUBDIR is a valid file system path, delimited by forward slashes as is the \*nix convention\. For NFS and Amazon EFS, it's the export path to mount the location\. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location\.  
   
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$`   
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$`   
 Required: No
 
 ## See Also<a name="API_LocationListEntry_SeeAlso"></a>

@@ -1,11 +1,11 @@
 # FsxProtocolNfs<a name="API_FsxProtocolNfs"></a>
 
-Represents the Network File System \(NFS\) protocol that AWS DataSync uses to access your Amazon FSx for OpenZFS file system\.
+Specifies the Network File System \(NFS\) protocol configuration that AWS DataSync uses to access your Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP file system\.
 
 ## Contents<a name="API_FsxProtocolNfs_Contents"></a>
 
  ** MountOptions **   <a name="DataSync-Type-FsxProtocolNfs-MountOptions"></a>
-Represents the mount options that are available for DataSync to access an NFS location\.  
+Specifies how DataSync can access a location using the NFS protocol\.  
 Type: [NfsMountOptions](API_NfsMountOptions.md) object  
 Required: No
 

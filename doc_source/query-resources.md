@@ -1,13 +1,8 @@
-# API filters for ListTasks and ListLocations<a name="query-resources"></a>
+# Filtering AWS DataSync resources<a name="query-resources"></a>
 
-AWS DataSync supports filters as input arguments to the `ListTasks` and `ListLocations` API calls\. This enables you to retrieve configurations of data transfer tasks by using filters such as the source or destination for the data transfer\. 
+You can filter your AWS DataSync locations and tasks by using the `ListLocations` and `ListTasks` API operations in the AWS CLI\. For example, retrieve a list of your most recent tasks\.
 
-**Topics**
-+ [Parameters for API filtering](#API-filter-parameters)
-+ [API filtering for ListLocations](#ListLocations)
-+ [API filtering for ListTasks](#ListTasks)
-
-## Parameters for API filtering<a name="API-filter-parameters"></a>
+## Parameters for filtering<a name="API-filter-parameters"></a>
 
 You can use API filters to narrow down the list of resources returned by `ListTasks` and `ListLocations`\. For example, to retrieve all of your Amazon S3 locations, you can use `ListLocations` with the filter name `LocationType` *`S3`* and `Operator` *`Equals`*\.
 
@@ -32,10 +27,21 @@ The following table lists the available operators\.
 | NotContains | String | 
 | BeginsWith | String | 
 
-## API filtering for ListLocations<a name="ListLocations"></a>
+## Filtering by location<a name="ListLocations"></a>
 
 `ListLocations` supports the following filter names:
-+ `LocationType` – Filters on the location type: `SMB`, `NFS`, `HDFS`, `S3`, `FSXW`, `FSXL`, `FSXZ`, and `OBJECT_STORAGE`\.
++ `LocationType` – Filters on the location type:
+  + `SMB`
+  + `NFS`
+  + `HDFS`
+  + `OBJECT_STORAGE`
+  + `S3`
+  + `OUTPOST_S3`
+  + `FSX_WINDOWS`
+  + `FSX_LUSTRE`
+  + `FSX_OPENZFS_NFS`
+  + `FSX_ONTAP_NFS`
+  + `FSX_ONTAP_SMB`
 + `LocationUri` – Filters on the uniform resource identifier \(URI\) assigned to the location, as returned by the `DescribeLocation*` API call \(for example, `s3://bucket-name/your-prefix` for Amazon S3 locations\)\.
 + `CreationTime` – Filters on the time that the location was created\. The input format is `yyyy-MM-dd:mm:ss` in Coordinated Universal Time \(UTC\)\.
 
@@ -63,7 +69,7 @@ This command returns output similar to the following\.
 }
 ```
 
-## API filtering for ListTasks<a name="ListTasks"></a>
+## Filtering by task<a name="ListTasks"></a>
 
 `ListTasks` supports the following filter names\.
 + `LocationId` – Filters on both source and destination locations on Amazon Resource Name \(ARN\) values\.

@@ -1,6 +1,6 @@
 # DescribeLocationFsxLustre<a name="API_DescribeLocationFsxLustre"></a>
 
-Returns metadata about an Amazon FSx for Lustre location, such as information about its path\.
+Provides details about how an AWS DataSync location for an Amazon FSx for Lustre file system is configured\.
 
 ## Request Syntax<a name="API_DescribeLocationFsxLustre_RequestSyntax"></a>
 
@@ -53,8 +53,8 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
  ** [LocationUri](#API_DescribeLocationFsxLustre_ResponseSyntax) **   <a name="DataSync-DescribeLocationFsxLustre-response-LocationUri"></a>
 The URI of the FSx for Lustre location that was described\.  
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [SecurityGroupArns](#API_DescribeLocationFsxLustre_ResponseSyntax) **   <a name="DataSync-DescribeLocationFsxLustre-response-SecurityGroupArns"></a>
 The Amazon Resource Names \(ARNs\) of the security groups that are configured for the FSx for Lustre file system\.  

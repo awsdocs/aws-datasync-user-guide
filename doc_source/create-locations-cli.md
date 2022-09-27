@@ -1,8 +1,8 @@
-# Creating locations<a name="create-locations-cli"></a>
+# Creating AWS DataSync locations with the AWS CLI<a name="create-locations-cli"></a>
 
-Each AWS DataSync task is made up of a pair of locations between which data is transferred\. The source location defines the storage system or service that you want to read data from\. The destination location defines the storage system or service that you want to write data to\.
+Each AWS DataSync task is made up of a pair of locations in a transfer\. The source location defines the storage system or service that you want to read data from\. The destination location defines the storage system or service that you want to write data to\.
 
-You can work with the following locations: 
+With the AWS Command Line Interface \(AWS CLI\), you can create locations for the following storage systems and services:
 + Network File System \(NFS\)
 + Server Message Block \(SMB\)
 + Hadoop Distributed File System \(HDFS\)
@@ -11,24 +11,14 @@ You can work with the following locations:
 + Amazon FSx for Windows File Server
 + Amazon FSx for Lustre
 + Amazon FSx for OpenZFS
++ Amazon FSx for NetApp ONTAP
 + Amazon Simple Storage Service \(Amazon S3\)
 
-For a list of all DataSync supported source and destination endpoints, see [Working with locations](working-with-locations.md)\.
-
-**Topics**
-+ [Creating an NFS location](#create-location-nfs-cli)
-+ [Creating an SMB location](#create-location-smb-cli)
-+ [Creating an HDFS location](#create-location-hdfs-cli)
-+ [Creating an object storage location](#create-location-object-cli)
-+ [Creating an Amazon EFS location](#create-location-efs-cli)
-+ [Creating an Amazon FSx for Windows File Server location](#create-location-fsx-cli)
-+ [Creating an Amazon FSx for Lustre location](#create-location-lustre-cli)
-+ [Creating an Amazon FSx for OpenZFS location](#create-openzfs-location-cli)
-+ [Creating an Amazon S3 location](#create-location-s3-cli)
+For more information, see [Working with AWS DataSync locations](working-with-locations.md)\.
 
 ## Creating an NFS location<a name="create-location-nfs-cli"></a>
 
-Use the following procedure to create an NFS location by using the AWS CLI\. An NFS location defines a file system on an NFS server that can be read from or written to\. You can also create an NFS location by using the AWS Management Console\. For more information, see [Creating a location for NFS](create-nfs-location.md)\. 
+An NFS location defines a file system on an NFS server that can be read from or written to\. You can also create an NFS location by using` the AWS Management Console\. For more information, see [Creating an NFS location](create-nfs-location.md)\. 
 
 **Note**  
 If you are using an NFS location on an AWS Snowcone device, see [NFS server on AWS Snowcone](create-nfs-location.md#nfs-on-snowcone) for more information about transferring data to or from that device\.
@@ -39,7 +29,7 @@ If you are using an NFS location on an AWS Snowcone device, see [NFS server on A
   ```
   $ aws datasync create-location-nfs \
       --server-hostname nfs-server-address \
-      --on-prem-config AgentArns=agent-arns \
+      --on-prem-config AgentArns=datasync-agent-arns \
       --subdirectory nfs-export-path
   ```
 
@@ -68,7 +58,7 @@ mount -t nfs -o nfsvers=3 198.51.100.123:/path_for_sync_to_read_from /temp_folde
 
 ## Creating an SMB location<a name="create-location-smb-cli"></a>
 
-Use the following procedure to create an SMB location by using the AWS CLI\. An SMB location defines a file system on an SMB server that can be read from or written to\. You can also create an SMB location by using the console\. For more information, see [Creating a location for SMB](create-smb-location.md)\. 
+An SMB location defines a file system on an SMB server that can be read from or written to\. You can also create an SMB location by using the console\. For more information, see [Creating an SMB location](create-smb-location.md)\. 
 
 **To create an SMB location by using the CLI**
 + Use the following command to create an SMB source location\.
@@ -76,13 +66,14 @@ Use the following procedure to create an SMB location by using the AWS CLI\. An 
   ```
   aws datasync create-location-smb \
       --server-hostname smb-server-address \
-      --user user-name \
+      --user user-who-can-mount-share \
       --domain domain-of-the-smb-server \
-      --password user's-password AgentArns=agent-arns \
+      --password user-password \
+      --agent-arns datasync-agent-arns \
       --subdirectory smb-export-path
   ```
 
-  The path \(`smb-export-path`\) that you provide for the `--subdirectory` parameter should be a path that's exported by the SMB server, or a subdirectory\. Specify the path by using forward slashes; for example, `/path/to/folder`\. Other SMB clients in your network should be able to access this path\.
+  The `smb-export-path` that you provide for the `--subdirectory` parameter should be a path that's exported by the SMB server, or a subdirectory\. Specify the path by using forward slashes; for example, `/path/to/folder`\. Other SMB clients in your network should be able to access this path\.
 
   DataSync automatically chooses the SMB version that it uses to read from an SMB location\. To specify an SMB version, use the optional `Version` parameter in the [SmbMountOptions](API_SmbMountOptions.md) API operation\.
 
@@ -96,7 +87,7 @@ This command returns the Amazon Resource Name \(ARN\) of the SMB location, simil
 
 ## Creating an HDFS location<a name="create-location-hdfs-cli"></a>
 
-Use the following procedure to create a Hadoop Distributed File System \(HDFS\) location by using the AWS CLI\. An HDFS location defines a file system on a Hadoop cluster that can be read from or written to\. You can also create an HDFS location by using the AWS Management Console\. For more information, see [Creating a location for HDFS](create-hdfs-location.md)\.
+An HDFS location defines a file system on a Hadoop cluster that can be read from or written to\. You can also create an HDFS location by using the AWS Management Console\. For more information, see [Creating an HDFS location](create-hdfs-location.md)\.
 
 **To create an HDFS location by using the AWS CLI**
 + Use the following command to create an HDFS location\. In the following example, replace each `user input placeholder` with your own information\.
@@ -113,7 +104,7 @@ Use the following procedure to create a Hadoop Distributed File System \(HDFS\) 
   + `authentication-type` – The type of authentication to use when connecting to the Hadoop cluster\. Specify `SIMPLE` or `KERBEROS`\.
 
     If you use `SIMPLE` authentication, use the `--simple-user` parameter to specify the user name of the user\. If you use `KERBEROS` authentication, use the `--kerberos-principal`, `--kerberos-keytab`, and `--kerberos-krb5-conf` parameters\. For more information, see [create\-location\-hdfs](https://docs.aws.amazon.com/cli/latest/reference/datasync/create-location-hdfs.html)\.
-  + `agent-arns` – The Amazon Resource Names \(ARNs\) of the agents to use for the HDFS location\.
+  + `agent-arns` – The ARNs of the DataSync agents to use for the HDFS location\.
 
   The preceding the command returns the location ARN, similar to the following:
 
@@ -125,17 +116,17 @@ Use the following procedure to create a Hadoop Distributed File System \(HDFS\) 
 
 ## Creating an object storage location<a name="create-location-object-cli"></a>
 
-Use the following procedure to create a self\-managed object storage location by using the AWS CLI\. An object storage location is the endpoint for an Amazon S3 API\-compatible object storage server\. An object storage location defines an object storage server that can be read from or written to\.
+An object storage location is the endpoint for an object storage server that's compatible with the Amazon S3 API\. An object storage location defines an object storage server that can be read from or written to\.
 
-For more information about object storage locations, including compatibility requirements, see [Creating a location for object storage](create-object-location.md)\. 
+For more information about object storage locations, including compatibility requirements, see [Creating an object storage location](create-object-location.md)\. 
 
-**To create a self\-managed object storage location by using the CLI**
+**To create an object storage location by using the AWS CLI**
 + Use the following command to create a self\-managed object storage location\.
 
   ```
   aws datasync create-location-object-storage \
       --server-hostname object-storage-server.example.com \
-      --bucket-name myBucket \
+      --bucket-name DOC-EXAMPLE-BUCKET \
       --agent-arns arn:aws:datasync:us-east-1:123456789012:agent/agent-01234567890deadfb
   ```
 
@@ -156,9 +147,9 @@ The preceding command returns a location ARN similar to the following\.
 
 ## Creating an Amazon EFS location<a name="create-location-efs-cli"></a>
 
-Use the following procedure to create an Amazon EFS location by using the AWS CLI\. An EFS location is the endpoint for an Amazon EFS file system, which defines an EFS file system that can be read from or written to\. You can also create an EFS location by using the console\. For more information, see [Creating a location for Amazon EFS](create-efs-location.md)\. 
+A *location* is the endpoint for an Amazon EFS file system that can be read from or written to\. You can also create this kind of location by using the console\. For more information, see [Creating an Amazon EFS location](create-efs-location.md)\. 
 
-**To create an Amazon EFS location by using the CLI**
+**To create an Amazon EFS location by using the AWS CLI**
 
 1. If you don't have an Amazon EFS file system, create one\. For information about how to create an EFS file system, see [Getting started with Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the *Amazon Elastic File System User Guide*\.
 
@@ -190,7 +181,7 @@ The AWS Region that you specify is the one where your target S3 bucket or EFS fi
    }
    ```
 
-1. Specify an Amazon EC2 security group that can be used to access the mount target\. You can run the following command to find out the security group of the mount target\.
+1. Specify an Amazon EC2 security group that can access the mount target\. You can run the following command to find out the security group of the mount target\.
 
    ```
    aws efs describe-mount-target-security-groups \
@@ -210,7 +201,7 @@ The AWS Region that you specify is the one where your target S3 bucket or EFS fi
 
      For information about security groups and mount targets, see [Security groups for Amazon EC2 instances and mount targets](https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access) in the *Amazon Elastic File System User Guide\.*
 
-1. Create the EFS location\. To create the EFS location, you need the ARNs for your Amazon EC2 subnet, Amazon EC2 security group, and an EFS file system\. Because the DataSync API accepts fully qualified ARNs, you can construct these ARNs\. For information about how to construct ARNs for different services, see [Amazon Resource Names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *AWS General Reference*\. 
+1. Create the location\. To create the EFS location, you need the ARNs for your Amazon EC2 subnet, Amazon EC2 security group, and a file system\. Because the DataSync API accepts fully qualified ARNs, you can construct these ARNs\. For information about how to construct ARNs for different services, see [Amazon Resource Names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *AWS General Reference*\. 
 
    Use the following command to create an EFS location\.
 
@@ -234,9 +225,9 @@ The command returns a location ARN similar to the one shown following\.
 
 ## Creating an Amazon FSx for Windows File Server location<a name="create-location-fsx-cli"></a>
 
-Use the following procedure to create an FSx for Windows File Server location by using the AWS CLI\. An Amazon FSx location is the endpoint for an FSx for Windows File Server\. This endpoint defines the Amazon FSx file share that you can read from or write to\. 
+A *location* is an endpoint for an FSx for Windows File Server that you can read from or write to\. 
 
-You can also create an Amazon FSx location by using the console\. For more information, see [Creating a location for FSx for Windows File Server](create-fsx-location.md)\. 
+You can also create an FSx for Windows File Server location by using the console\. For more information, see [Creating an Amazon FSx for Windows File Server location](create-fsx-location.md)\. 
 
 **To create an FSx for Windows File Server location by using the AWS CLI**
 + Use the following command to create an Amazon FSx location\.
@@ -265,9 +256,9 @@ The preceding command returns a location ARN similar to the one shown following\
 
 ## Creating an Amazon FSx for Lustre location<a name="create-location-lustre-cli"></a>
 
-Use the following procedure to create an Amazon FSx for Lustre location by using the AWS CLI\. An FSx for Lustre location is an endpoint for an FSx for Lustre file system that you can read or write to\. 
+A *location* is an endpoint for an FSx for Lustre file system that you can read or write to\. 
 
-You can also create an FSx for Lustre location by using the console\. For more information, see [Creating a location for FSx for Lustre](create-lustre-location.md)\.
+You can also create an FSx for Lustre location by using the console\. For more information, see [Creating an Amazon FSx for Lustre location](create-lustre-location.md)\.
 
 **To create an FSx for Lustre location by using the AWS CLI**
 + Use the following command to create an FSx for Lustre location\.
@@ -280,7 +271,7 @@ You can also create an FSx for Lustre location by using the console\. For more i
 
   The following parameters are required in the `create-location-fsx-lustre` command\.
   + `fsx-filesystem-arn` – The fully qualified Amazon Resource Name \(ARN\) of the file system that you want to read from or write to\.
-  + `security-group-arns` – The ARN of an Amazon EC2 security group to apply to the elastic network interfaces of the file system's preferred subnet\. For more information, see [Dedicated Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html#creatingdedicatedvpc) in the *Amazon Elastic Compute Cloud User Guide for Linux Instances*\.
+  + `security-group-arns` – The ARN of an Amazon EC2 security group to apply to the network interfaces of the file system's preferred subnet\. For more information, see [Dedicated Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html#creatingdedicatedvpc) in the *Amazon Elastic Compute Cloud User Guide for Linux Instances*\.
 
 The preceding command returns a location ARN similar to the following\.
 
@@ -292,7 +283,7 @@ The preceding command returns a location ARN similar to the following\.
 
 ## Creating an Amazon FSx for OpenZFS location<a name="create-openzfs-location-cli"></a>
 
-With the AWS CLI, you can create an FSx for OpenZFS location for DataSync to transfer from or to\. You also can create an [FSx for OpenZFS location in the console](create-openzfs-location.md)\.
+A *location* is an endpoint for an FSx for OpenZFS file system that DataSync can access for a transfer\. You also can create an [FSx for OpenZFS location in the console](create-openzfs-location.md)\.
 
 **To create an FSx for OpenZFS location by using the AWS CLI**
 
@@ -305,9 +296,9 @@ With the AWS CLI, you can create an FSx for OpenZFS location for DataSync to tra
       --protocol NFS={}
    ```
 
-1. Specify the following in the command:
+1. Specify the following required options in the command:
    + For `fsx-filesystem-arn`, specify the location file system's fully qualified Amazon Resource Name \(ARN\)\. This includes the AWS Region where your file system resides, your AWS account, and the file system ID\.
-   + For `security-group-arns`, specify the ARN of the Amazon EC2 security group that provides access to the elastic network interfaces of your FSx for OpenZFS file system's preferred subnet\. This includes the AWS Region where your Amazon EC2 instance resides, your AWS account, and the security group ID\.
+   + For `security-group-arns`, specify the ARN of the Amazon EC2 security group that provides access to the network interfaces of your FSx for OpenZFS file system's preferred subnet\. This includes the AWS Region where your Amazon EC2 instance resides, your AWS account, and the security group ID\.
 
      For more information about security groups, see [File System Access Control with Amazon VPC](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/limit-access-security-groups.html) in the *Amazon FSx for OpenZFS User Guide*\.
    + For `protocol`, specify the protocol that DataSync uses to access your file system\. \(DataSync currently supports only NFS\.\)
@@ -320,15 +311,57 @@ With the AWS CLI, you can create an FSx for OpenZFS location for DataSync to tra
    }
    ```
 
+## Creating an Amazon FSx for NetApp ONTAP location<a name="create-ontap-location-cli"></a>
+
+A *location* is an endpoint for an FSx for ONTAP file system that DataSync can access for a transfer\. You also can create an [FSx for ONTAP location in the console](create-ontap-location.md)\.
+
+**To create an FSx for ONTAP location by using the AWS CLI**
+
+1. Copy the following command:
+
+   ```
+   $ aws datasync create-location-fsx-ontap \
+      --storage-virtual-machine-arn arn:aws:fsx:region:account-id:storage-virtual-machine/fs-file-system-id \
+      --security-group-arns arn:aws:ec2:region:account-id:security-group/group-id \
+      --protocol data-transfer-protocol={}
+   ```
+
+1. Specify the following required options in the command:
+   + For `storage-virtual-machine-arn`, specify the fully qualified Amazon Resource Name \(ARN\) of a storage virtual machine \(SVM\) in your file system where you want to copy data to or from\.
+
+     This ARN includes the AWS Region where your file system resides, your AWS account, and the file system and SVM IDs\.
+   + For `security-group-arns`, specify the ARNs of the Amazon EC2 security groups that provide access to the network interfaces of your file system's preferred subnet\.
+
+     This includes the AWS Region where your Amazon EC2 instance resides, your AWS account, and your security group IDs\. You can specify up to five security group ARNs\.
+
+     For more information about security groups, see [File System Access Control with Amazon VPC](https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/limit-access-security-groups.html) in the *Amazon FSx for NetApp ONTAP User Guide*\.
+   + For `protocol`, configure the protocol that DataSync uses to access your file system's SVM\.
+     + For NFS, you can use the default configuration:
+
+       `--protocol NFS={}`
+     + For SMB, you must specify a user name and password that can access the SVM:
+
+       `--protocol SMB={User=smb-user,Password=smb-password}`
+
+1. Run the command\.
+
+   You get a response that shows the location that you just created\.
+
+   ```
+   { 
+       "LocationArn": "arn:aws:datasync:us-west-2:123456789012:location/loc-abcdef01234567890" 
+   }
+   ```
+
 ## Creating an Amazon S3 location<a name="create-location-s3-cli"></a>
 
-Use the following procedure to create an Amazon S3 location by using the AWS CLI\. An Amazon S3 location requires an Amazon S3 bucket that can be read from or written to\. To create an S3 bucket, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the *Amazon S3 User Guide*\. 
+An Amazon S3 location requires an S3 bucket that can be read from or written to\. To create an S3 bucket, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the *Amazon S3 User Guide*\. 
 
- For DataSync to access an S3 bucket, DataSync needs an AWS Identity and Access Management \(IAM\) role that has the required permissions\. With the following procedure, you create the IAM role, the required IAM policies, and the S3 location by using the AWS CLI\. 
+For DataSync to access an S3 bucket, DataSync needs an AWS Identity and Access Management \(IAM\) role that has the required permissions\. With the following procedure, you create the IAM role, the required IAM policies, and the S3 location by using the AWS CLI\. 
 
 For DataSync to assume the IAM role, AWS Security Token Service \(AWS STS\) must be activated in your account and Region\. For more information about temporary security credentials, see [Temporary security credentials in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) in the *IAM User Guide*\. 
 
-You can also create an S3 location by using the console\. For more information, see [Creating a location for Amazon S3](create-s3-location.md)\. 
+You can also create an S3 location by using the console\. For more information, see [Creating an Amazon S3 location](create-s3-location.md)\. 
 
 **To create an S3 location by using the CLI**
 
@@ -359,18 +392,15 @@ You can also create an S3 location by using the console\. For more information, 
    
    $ cat<<EOF> ${ROLE_FILE}
    {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "datasync.amazonaws.com"
-         },
-         "Action": "sts:AssumeRole"
-       }
-     ]
+       "Version": "2012-10-17",
+       "Statement": [{
+           "Effect": "Allow",
+           "Principal": {
+               "Service": "datasync.amazonaws.com"
+           },
+           "Action": "sts:AssumeRole"
+       }]
    }
-   EOF
    ```
 
 1. Create an IAM role and attach the IAM policy to it\.
@@ -388,15 +418,13 @@ You can also create an S3 location by using the console\. For more information, 
            "CreateDate": "2018-07-27T02:49:23.117Z",
            "AssumeRolePolicyDocument": {
                "Version": "2012-10-17",
-               "Statement": [
-                   {
-                       "Effect": "Allow",
-                       "Principal": {
-                           "Service": "datasync.amazonaws.com"
-                       },
-                       "Action": "sts:AssumeRole"
-                   }
-               ]
+               "Statement": [{
+                   "Effect": "Allow",
+                   "Principal": {
+                       "Service": "datasync.amazonaws.com"
+                   },
+                   "Action": "sts:AssumeRole"
+               }]
            }
        }
    }
@@ -449,8 +477,7 @@ You can also create an S3 location by using the console\. For more information, 
    ```
    {
        "Version": "2012-10-17",
-       "Statement": [
-           {
+       "Statement": [{
                "Action": [
                    "s3-outposts:ListBucket",
                    "s3-outposts:ListBucketMultipartUploads"
@@ -504,7 +531,7 @@ You can also create an S3 location by using the console\. For more information, 
 
    ```
    $ aws datasync create-location-s3 \
-       --s3-bucket-arn 'arn:aws:s3:::bucket' \
+       --s3-bucket-arn 'arn:aws:s3:::DOC-EXAMPLE-BUCKET' \
        --s3-storage-class 'your-S3-storage-class' \
        --s3-config 'BucketAccessRoleArn=arn:aws:iam::account-id:role/role-allowing-DS-operations' \
        --subdirectory /your-folder
@@ -528,14 +555,12 @@ You can also create an S3 location by using the console\. For more information, 
    aws datasync create-location-s3 \
        --s3-bucket-arn access-point-arn \
        --s3-config BucketAccessRoleArn=arn:aws:iam::account-id:role/role-allowing-DS-operations \
-       --agent-arns datasync-agent-arn-in-the-vpc-which-can-access-your-s3-acces-point
+       --agent-arns arn-of-datasync-agent-in-vpc-that-can-access-your-s3-access-point
    ```
-
-   
 
 **Note**  
 Changes to object data or metadata are equivalent to deleting an object and creating a new one to replace it\. This results in additional charges in the following scenarios:  
 **When using object versioning** – Changes to object data or metadata create a new version of the object\.
-**When using storage classes that can incur additional charges for overwriting, deleting, or retrieving, objects** – Changes to object data or metadata result in such charges\. For more information, see [Considerations when working with Amazon S3 storage classes in DataSync](create-s3-location.md#using-storage-classes)\. 
+**When using storage classes that can incur additional charges for overwriting, deleting, or retrieving, objects** – Changes to object data or metadata result in such charges\. For more information, see [Storage class considerations with Amazon S3 locations](create-s3-location.md#using-storage-classes)\. 
 When you use object versioning, a single DataSync task execution might create more than one version of an Amazon S3 object\.
 In addition to the IAM policies that grant DataSync permissions, we recommend creating a multipart upload bucket policy for your S3 buckets\. Doing this can help you control your storage costs\. For more information, see the blog post [ S3 lifecycle management update \- support for multipart uploads and delete markers](http://aws.amazon.com/blogs/aws/s3-lifecycle-management-update-support-for-multipart-uploads-and-delete-markers/)\.

@@ -1,31 +1,20 @@
 # Working with your DataSync agent's local console<a name="local-console-vm"></a>
 
-If you deployed your AWS DataSync agent on\-premises, you can troubleshoot issues with the agent using the VM's local console\. For example, you'll log in to the console if you need to run a connectivity test or open a support channel with AWS\.
+Although AWS manages your AWS DataSync agents, you can still work with an agent if needed through its local console\. For example, you might need to manually assign an agent's IP address or run a network test\. You also can allow AWS Support access to your agent to help with troubleshooting an issue \(such as a firewall misconfiguration\)\.
 
-**Note**  
+**Tip**  
 You don't need to use the agent's local console for standard DataSync functionality\.
-
-**Topics**
-+ [Logging in to the agent local console](#local-console-login)
-+ [Obtaining an activation key using the local console](#get-activation-key)
-+ [Configuring your agent network settings](#network-configration)
-+ [Testing your agent connection to DataSync endpoints](#test-network)
-+ [Testing connectivity to self\-managed storage](#self-managed-storage-connectivity)
-+ [Viewing your agent system resource status](#system-resource-check)
-+ [Configuring a Network Time Protocol \(NTP\) server for VMware agents](#time-management)
-+ [Running AWS DataSync commands on the local console](#command-prompts)
-+ [Enabling AWS Support to help troubleshoot your running agent](#enable-support-access)
 
 ## Logging in to the agent local console<a name="local-console-login"></a>
 
-For security reasons, you can't remotely connect to the local console of the DataSync agent VM\. 
+For security reasons, you can't remotely connect to the local console of the DataSync agent virtual machine \(VM\)\. 
 
 **To log in to the agent's local console**
 + If this is your first time using the local console, log in with the default credentials\. The default user name is **admin** and the password is **password**\. Otherwise, use your credentials to log in\.
 **Note**  
-We recommend changing the default password\. You do this by running the `passwd` command from the local console menu\. \(Item **5** on the main menu opens the command prompt\. For VMware VMs, choose item **6**\.\) For information about how to run the command, see [Running AWS DataSync commands on the local console](#command-prompts)\. 
+We recommend changing the default password\. You do this by running the `passwd` command from the local console menu\. \(Item **5** on the main menu opens the command prompt\. For VMware VMs, choose item **6**\.\) For information about how to run the command, see [Configuring the agent through its local console](#command-prompts)\. 
 
-## Obtaining an activation key using the local console<a name="get-activation-key"></a>
+## Obtaining an activation key by using the local console<a name="get-activation-key"></a>
 
 If your agent isn't activated yet, you can obtain its activation key from the local console\. This option is displayed only until the agent has been activated\.
 
@@ -41,7 +30,7 @@ If your agent isn't activated yet, you can obtain its activation key from the lo
 
 1. The activation key is automatically generated and displayed on screen\. Select and copy this value\.
 
-1. Using the activation key copied from the last step, use the following CLI command to create and activate the agent:
+1. Using the activation key copied from the last step, use the following `create-agent` CLI command to create and activate the agent:
 
    ```
    $ aws datasync create-agent --agent-name your-new-agent-name --activation-key generated-activation-key
@@ -55,7 +44,7 @@ If your agent isn't activated yet, you can obtain its activation key from the lo
    }
    ```
 
-   You can also insert the activation key in the DataSync console using the agent creation wizard\.
+   You can also insert the activation key in the DataSync console by using the agent creation wizard\.
 
    After the agent is activated, the console menu displays the **Agent ID** and **AWS Region**\. The option for getting an activation key is no longer visible in the console menu\. 
 
@@ -65,14 +54,14 @@ The default network configuration for the agent is Dynamic Host Configuration Pr
 
 **To configure your agent to use static IP addresses**
 
-1. Log in to your agent's local console
+1. Log in to your agent's local console\.
 
 1. On the **AWS DataSync Activation \- Configuration** main menu, enter **1** to begin configuring your network\.
 
 1. On the ** Network Configuration** menu, choose one of the following options\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/local-console-vm.html)
 
-## Testing your agent connection to DataSync endpoints<a name="test-network"></a>
+## Testing your agent's connection to DataSync endpoints<a name="test-network"></a>
 
 You can use your agent's local console to test your internet connection\. This test can be useful when you are troubleshooting network issues with your agent\.
 
@@ -82,7 +71,7 @@ You can use your agent's local console to test your internet connection\. This t
 
 1. On the **AWS DataSync Activation \- Configuration** main menu, enter **2** to begin testing network connectivity\.
 
-1. Enter the service endpoint type that your agent is connecting to\. Valid endpoint types include public, FIPS, and VPC endpoints using AWS PrivateLink\.
+1. Enter the service endpoint type that your agent is connecting to\. Valid endpoint types include public, FIPS, and VPC endpoints that are using AWS PrivateLink\.
 
    When the agent is activated, the **Test Network Connectivity** option can be initiated without any additional user input, because the Region and endpoint type are taken from the activated agent information\.
 
@@ -98,31 +87,33 @@ You can use your agent's local console to test your internet connection\. This t
 
       Each VPC endpoint displays either a **PASSED** or **FAILED** message\.
 
-For information about network and firewall requirements, see [Network requirements](datasync-network.md)\.
+For information about network and firewall requirements, see [AWS DataSync network requirements](datasync-network.md)\.
 
-## Testing connectivity to self\-managed storage<a name="self-managed-storage-connectivity"></a>
+## Testing connectivity to storage systems<a name="self-managed-storage-connectivity"></a>
 
-You can use the console to test connectivity to your self\-managed storage, including Network File System \(NFS\), Server Message Block \(SMB\), Hadoop Distributed File System \(HDFS\), or object storage servers\.
+You can use the console to test connectivity to storage systems involved in your transfer, including Network File System \(NFS\), Server Message Block \(SMB\), Hadoop Distributed File System \(HDFS\), or object storage servers\.
 
-**To test connectivity to self\-managed storage servers**
+**To test connectivity to storage systems**
 
 1. Log in to your agent's local console\.
 
-1. On the **AWS DataSync Activation \- Configuration** main menu, enter **3** to begin testing network connectivity of self\-managed storage\.
+1. On the **AWS DataSync Activation \- Configuration** main menu, enter **3** to begin network testing\.
 
-1. Choose the location type for connectivity testing\. Options include the following\.
+1. Choose the location type that you're testing by using one of the following options\.
 
-   1. Enter **1** to test connectivity to an NFS server\.
+   1. Enter **1** to test an NFS server connection\.
 
-   1. Enter **2** to test connectivity to an SMB server\.
+   1. Enter **2** to test an SMB server connection\.
 
-   1. Enter **3** to test connectivity to an object storage server\.
+   1. Enter **3** to test an object storage server connection\.
 
-   1. Enter **4** to test connectivity to HDFS\.
+   1. Enter **4** to test an HDFS connection\.
 
-   Enter the IP address or server domain name of the self\-managed storage\. For HDFS, enter the IP address or hostname of the NameNode or DataNode in the Hadoop cluster, followed by the TCP port number\. 
+1. Enter the IP address or server domain name of the storage server\.
 
-   Connectivity test results, either **PASSED** or **FAILED**, are displayed for the specified server, along with the IP address and port of the tested server\.
+   For HDFS, enter the IP address or hostname of the NameNode or DataNode in the Hadoop cluster, followed by the TCP port number\. 
+
+Connectivity test results, either **PASSED** or **FAILED**, are displayed for the specified server, along with the IP address and port of the tested server\.
 
 ## Viewing your agent system resource status<a name="system-resource-check"></a>
 
@@ -154,7 +145,7 @@ If there are errors or warnings, the console menu displays the number of errors 
 
    The same resources are verified for agents deployed in Hyper\-V, Linux Kernel\-based Virtual Machine \(KVM\), and VMware VMs\.
 
-   VMware agents are also checked for supported version; unsupported versions trigger a red banner error\. Supported versions include VMware versions 6\.5 and 6\.7\.
+   VMware agents are also checked for supported version; unsupported versions cause a red banner error\. Supported versions include VMware versions 6\.5 and 6\.7\.
 
 ## Configuring a Network Time Protocol \(NTP\) server for VMware agents<a name="time-management"></a>
 
@@ -169,24 +160,22 @@ If you are using a VMware VM, you can view Network Time Protocol \(NTP\) server 
 1. On the **System Time Management** menu, enter **1** to view and synchronize the VM system time\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/local-console-vm.html)
 
-## Running AWS DataSync commands on the local console<a name="command-prompts"></a>
+## Configuring the agent through its local console<a name="command-prompts"></a>
 
-The VM local console in AWS DataSync helps provide a secure environment for configuring and diagnosing issues with your agent\. Using the local console commands, you can perform maintenance tasks such as saving routing tables, connecting to AWS Support, and so on\.
+In a DataSync agent's local console, you can perform some maintenance tasks and diagnose issues with your agent\.
 
-**To run a configuration or diagnostic command**
+**To run a configuration or diagnostic command in your agent's local console**
 
 1. Log in to your agent's local console\.
 
-1. On the **AWS DataSync Activation \- Configuration** main menu, enter **5** for **Command Prompt**\.
-**Note**  
-If you are using a VMware VM, enter **6** for the **Command Prompt**\.
+1. On the **AWS DataSync Activation \- Configuration** main menu, enter **5** \(or for **6** a VMware VM\) for the **Command Prompt**\.
 
-1. The commands available to be used through the console include the following\.    
+1. Use the following commands to perform the following tasks with your agent\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/datasync/latest/userguide/local-console-vm.html)
 
-1. At the command prompt, enter the command that you want to use and follow the instructions\.
+1. Follow the onscreen instructions\.
 
-## Enabling AWS Support to help troubleshoot your running agent<a name="enable-support-access"></a>
+## Getting help with your agent from AWS Support<a name="enable-support-access"></a>
 
 You can allow AWS Support to access your AWS DataSync agent and assist you with troubleshooting agent issues\. By default, AWS Support access to DataSync is disabled\. You enable this access through the host's local console\. To give AWS Support access to DataSync, you first log in to the local console for the host and then connect to the support server\.
 

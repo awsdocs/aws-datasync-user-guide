@@ -1,6 +1,6 @@
 # CreateLocationObjectStorage<a name="API_CreateLocationObjectStorage"></a>
 
-Creates an endpoint for a self\-managed object storage bucket\. For more information about self\-managed object storage locations, see [Creating a location for object storage](https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)\.
+Creates an endpoint for an object storage system that AWS DataSync can access for a transfer\. For more information, see [Creating a location for object storage](https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)\.
 
 ## Request Syntax<a name="API_CreateLocationObjectStorage_RequestSyntax"></a>
 
@@ -30,14 +30,14 @@ For information about the parameters that are common to all actions, see [Common
 The request accepts the following data in JSON format\.
 
  ** [AccessKey](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-AccessKey"></a>
-Optional\. The access key is used if credentials are required to access the self\-managed object storage server\. If your object storage requires a user name and password to authenticate, use `AccessKey` and `SecretKey` to provide the user name and password, respectively\.  
+Specifies the access key \(for example, a user name\) if credentials are required to authenticate with the object storage server\.  
 Type: String  
 Length Constraints: Minimum length of 8\. Maximum length of 200\.  
 Pattern: `^.+$`   
 Required: No
 
  ** [AgentArns](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-AgentArns"></a>
-The Amazon Resource Name \(ARN\) of the agents associated with the self\-managed object storage server location\.  
+Specifies the Amazon Resource Names \(ARNs\) of the DataSync agents that can securely connect with your location\.  
 Type: Array of strings  
 Array Members: Minimum number of 1 item\. Maximum number of 4 items\.  
 Length Constraints: Maximum length of 128\.  
@@ -45,47 +45,47 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
 Required: Yes
 
  ** [BucketName](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-BucketName"></a>
-The bucket on the self\-managed object storage server that is used to read data from\.  
+Specifies the name of the object storage bucket involved in the transfer\.  
 Type: String  
 Length Constraints: Minimum length of 3\. Maximum length of 63\.  
 Pattern: `^[a-zA-Z0-9_\-\+\./\(\)\$\p{Zs}]+$`   
 Required: Yes
 
  ** [SecretKey](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-SecretKey"></a>
-Optional\. The secret key is used if credentials are required to access the self\-managed object storage server\. If your object storage requires a user name and password to authenticate, use `AccessKey` and `SecretKey` to provide the user name and password, respectively\.  
+Specifies the secret key \(for example, a password\) if credentials are required to authenticate with the object storage server\.  
 Type: String  
 Length Constraints: Minimum length of 8\. Maximum length of 200\.  
 Pattern: `^.+$`   
 Required: No
 
  ** [ServerHostname](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-ServerHostname"></a>
-The name of the self\-managed object storage server\. This value is the IP address or Domain Name Service \(DNS\) name of the object storage server\. An agent uses this hostname to mount the object storage server in a network\.   
+Specifies the domain name or IP address of the object storage server\. A DataSync agent uses this hostname to mount the object storage server in a network\.  
 Type: String  
 Length Constraints: Maximum length of 255\.  
 Pattern: `^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])$`   
 Required: Yes
 
  ** [ServerPort](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-ServerPort"></a>
-The port that your self\-managed object storage server accepts inbound network traffic on\. The server port is set by default to TCP 80 \(HTTP\) or TCP 443 \(HTTPS\)\. You can specify a custom port if your self\-managed object storage server requires one\.  
+Specifies the port that your object storage server accepts inbound network traffic on \(for example, port 443\)\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 65536\.  
 Required: No
 
  ** [ServerProtocol](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-ServerProtocol"></a>
-The protocol that the object storage server uses to communicate\. Valid values are HTTP or HTTPS\.  
+Specifies the protocol that your object storage server uses to communicate\.  
 Type: String  
 Valid Values:` HTTPS | HTTP`   
 Required: No
 
  ** [Subdirectory](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-Subdirectory"></a>
-The subdirectory in the self\-managed object storage server that is used to read data from\.  
+Specifies the object prefix for your object storage server\. If this is a source location, DataSync only copies objects with this prefix\. If this is a destination location, DataSync writes all objects with this prefix\.   
 Type: String  
 Length Constraints: Maximum length of 4096\.  
 Pattern: `^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]*$`   
 Required: No
 
  ** [Tags](#API_CreateLocationObjectStorage_RequestSyntax) **   <a name="DataSync-CreateLocationObjectStorage-request-Tags"></a>
-The key\-value pair that represents the tag that you want to add to the location\. The value can be an empty string\. We recommend using tags to name your resources\.  
+Specifies the key\-value pair that represents a tag that you want to add to the resource\. Tags can help you manage, filter, and search for your resources\. We recommend creating a name tag for your location\.  
 Type: Array of [TagListEntry](API_TagListEntry.md) objects  
 Array Members: Minimum number of 0 items\. Maximum number of 50 items\.  
 Required: No
@@ -105,7 +105,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [LocationArn](#API_CreateLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-CreateLocationObjectStorage-response-LocationArn"></a>
-The Amazon Resource Name \(ARN\) of the agents associated with the self\-managed object storage server location\.  
+Specifies the ARN of the object storage system location that you create\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$` 

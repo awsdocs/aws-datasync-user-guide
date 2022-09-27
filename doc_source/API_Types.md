@@ -6,6 +6,7 @@ The following data types are supported:
 +  [FilterRule](API_FilterRule.md) 
 +  [FsxProtocol](API_FsxProtocol.md) 
 +  [FsxProtocolNfs](API_FsxProtocolNfs.md) 
++  [FsxProtocolSmb](API_FsxProtocolSmb.md) 
 +  [HdfsNameNode](API_HdfsNameNode.md) 
 +  [LocationFilter](API_LocationFilter.md) 
 +  [LocationListEntry](API_LocationListEntry.md) 

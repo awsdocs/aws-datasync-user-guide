@@ -17,6 +17,7 @@ The only `Option` that can be modified by `UpdateTaskExecution` is ` [BytesPerSe
       "Gid": "string",
       "LogLevel": "string",
       "Mtime": "string",
+      "ObjectTags": "string",
       "OverwriteMode": "string",
       "PosixPermissions": "string",
       "PreserveDeletedFiles": "string",

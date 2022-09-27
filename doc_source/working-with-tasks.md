@@ -4,7 +4,7 @@ In AWS DataSync, a *task* defines where and how you're transferring data\. You s
 
 **Topics**
 + [Creating your DataSync task](creating-task.md)
-+ [Filtering the data transferred by DataSync](filtering.md)
++ [Filtering data transferred by AWS DataSync](filtering.md)
 + [Scheduling your DataSync task](task-scheduling.md)
 + [DataSync task creation statuses](understand-task-creation-statuses.md)
 + [Starting your DataSync task](run-task.md)

@@ -1,6 +1,6 @@
 # DescribeLocationObjectStorage<a name="API_DescribeLocationObjectStorage"></a>
 
-Returns metadata about a self\-managed object storage server location\. For more information about self\-managed object storage locations, see [Creating a location for object storage](https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)\.
+Returns metadata about your AWS DataSync location for an object storage system\.
 
 ## Request Syntax<a name="API_DescribeLocationObjectStorage_RequestSyntax"></a>
 
@@ -17,7 +17,7 @@ For information about the parameters that are common to all actions, see [Common
 The request accepts the following data in JSON format\.
 
  ** [LocationArn](#API_DescribeLocationObjectStorage_RequestSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-request-LocationArn"></a>
-The Amazon Resource Name \(ARN\) of the self\-managed object storage server location that was described\.  
+The Amazon Resource Name \(ARN\) of the object storage system location that you want information about\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$`   
@@ -44,41 +44,41 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [AccessKey](#API_DescribeLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-response-AccessKey"></a>
-Optional\. The access key is used if credentials are required to access the self\-managed object storage server\. If your object storage requires a user name and password to authenticate, use `AccessKey` and `SecretKey` to provide the user name and password, respectively\.  
+The access key \(for example, a user name\) required to authenticate with the object storage server\.  
 Type: String  
 Length Constraints: Minimum length of 8\. Maximum length of 200\.  
 Pattern: `^.+$` 
 
  ** [AgentArns](#API_DescribeLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-response-AgentArns"></a>
-The Amazon Resource Name \(ARN\) of the agents associated with the self\-managed object storage server location\.  
+The ARNs of the DataSync agents that can securely connect with your location\.  
 Type: Array of strings  
 Array Members: Minimum number of 1 item\. Maximum number of 4 items\.  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$` 
 
  ** [CreationTime](#API_DescribeLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-response-CreationTime"></a>
-The time that the self\-managed object storage server agent was created\.  
+The time that the location was created\.  
 Type: Timestamp
 
  ** [LocationArn](#API_DescribeLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-response-LocationArn"></a>
-The Amazon Resource Name \(ARN\) of the self\-managed object storage server location to describe\.  
+The ARN of the object storage system location\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$` 
 
  ** [LocationUri](#API_DescribeLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-response-LocationUri"></a>
-The URL of the source self\-managed object storage server location that was described\.  
+The URL of the object storage system location\.  
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [ServerPort](#API_DescribeLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-response-ServerPort"></a>
-The port that your self\-managed object storage server accepts inbound network traffic on\. The server port is set by default to TCP 80 \(HTTP\) or TCP 443 \(HTTPS\)\.  
+The port that your object storage server accepts inbound network traffic on \(for example, port 443\)\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 65536\.
 
  ** [ServerProtocol](#API_DescribeLocationObjectStorage_ResponseSyntax) **   <a name="DataSync-DescribeLocationObjectStorage-response-ServerProtocol"></a>
-The protocol that the object storage server uses to communicate\. Valid values are HTTP or HTTPS\.  
+The protocol that your object storage server uses to communicate\.  
 Type: String  
 Valid Values:` HTTPS | HTTP` 
 

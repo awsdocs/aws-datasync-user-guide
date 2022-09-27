@@ -1,11 +1,11 @@
 # SmbMountOptions<a name="API_SmbMountOptions"></a>
 
-Represents the mount options that are available for DataSync to access an SMB location\.
+Specifies how DataSync can access a location using the SMB protocol\.
 
 ## Contents<a name="API_SmbMountOptions_Contents"></a>
 
  ** Version **   <a name="DataSync-Type-SmbMountOptions-Version"></a>
-The specific SMB version that you want DataSync to use to mount your SMB share\. If you don't specify a version, DataSync defaults to `AUTOMATIC`\. That is, DataSync automatically selects a version based on negotiation with the SMB server\.  
+Specifies the SMB version that you want DataSync to use when mounting your SMB share\. If you don't specify a version, DataSync defaults to `AUTOMATIC` and chooses a version based on negotiation with the SMB server\.  
 Type: String  
 Valid Values:` AUTOMATIC | SMB2 | SMB3`   
 Required: No

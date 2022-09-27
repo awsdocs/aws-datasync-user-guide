@@ -1,4 +1,4 @@
-# Monitoring your task<a name="monitor-task-execution"></a>
+# Monitoring your AWS DataSync task with the AWS CLI<a name="monitor-task-execution"></a>
 
 To monitor the status of your task execution with the CLI, use the `describe-task-execution` command\.
 

@@ -11,17 +11,18 @@ If this is your first time using DataSync, the instructions in [Getting started 
 ## Prerequisite: Creating the locations for your DataSync task<a name="creating-tasks-endpoints"></a>
 
 A DataSync task requires a source and destination location to transfer data between\.
-+ [Creating a location for NFS](create-nfs-location.md)
-+ [Creating a location for SMB](create-smb-location.md)
-+ [Creating a location for HDFS](create-hdfs-location.md)
-+ [Creating a location for object storage](create-object-location.md)
-+ [Creating a location for Amazon EFS](create-efs-location.md)
-+ [Creating a location for FSx for Windows File Server](create-fsx-location.md)
-+ [Creating a location for FSx for Lustre](create-lustre-location.md)
-+ [Creating a location for FSx for OpenZFS](create-openzfs-location.md)
-+ [Creating a location for Amazon S3](create-s3-location.md)
++ [Creating an NFS location](create-nfs-location.md)
++ [Creating an SMB location](create-smb-location.md)
++ [Creating an HDFS location](create-hdfs-location.md)
++ [Creating an object storage location](create-object-location.md)
++ [Creating an Amazon EFS location](create-efs-location.md)
++ [Creating an Amazon FSx for Windows File Server location](create-fsx-location.md)
++ [Creating an Amazon FSx for Lustre location](create-lustre-location.md)
++ [Creating an Amazon FSx for OpenZFS location](create-openzfs-location.md)
++ [Creating an Amazon FSx for NetApp ONTAP location](create-ontap-location.md)
++ [Creating an Amazon S3 location](create-s3-location.md)
 
-For a list of supported DataSync locations and transfer scenarios, see [Working with locations](working-with-locations.md)\.
+For a list of supported DataSync locations and transfer scenarios, see [Working with AWS DataSync locations](working-with-locations.md)\.
 
 ## Creating a task to transfer data between self\-managed storage and AWS<a name="Task-onpremises-aws"></a>
 
@@ -31,9 +32,9 @@ If you have previously created a task and want to create additional tasks, use t
 
 1. Open the AWS DataSync console at [https://console\.aws\.amazon\.com/datasync/](https://console.aws.amazon.com/datasync/)\.
 
-1. In the navigation pane, choose **Tasks**, and then choose **Create task**\.
+1. In the left navigation pane, choose **Tasks**, and then choose **Create task**\.
 
-1. On the **Configure source location** page, choose** Create new location** and configure a new location if you want to use a new location for your source\. Provide the configuration settings and choose **Next**\. For instructions on how to create a location, see [Working with locations](working-with-locations.md)\.
+1. On the **Configure source location** page, choose** Create new location** and configure a new location if you want to use a new location for your source\. Provide the configuration settings and choose **Next**\. For instructions on how to create a location, see [Working with AWS DataSync locations](working-with-locations.md)\.
 
    If you want to use a source location that you previously created, choose **Choose existing location**, choose your source location from the list, and then choose **Next**\.
 
@@ -42,12 +43,12 @@ If you have previously created a task and want to create additional tasks, use t
 ## Creating a task to transfer between in\-cloud locations<a name="in-coud-setup"></a>
 
 Use the following instructions to set up the DataSync agent on an Amazon EC2 instance for data transfers\. The examples in this section cover these use cases: 
-+ [Data transfer from in\-cloud file system to in\-cloud file system or Amazon S3](using-ec2-agent-in-region.md#efs-efs) – Transfer data from Amazon EFS to Amazon EFS, from self\-managed NFS to EFS, or to Amazon S3\.
-+ [Data transfer from S3 to in\-cloud file systems](using-ec2-agent-in-region.md#s3-cloud-nfs) – Transfer data from Amazon S3 to Amazon EFS, or from Amazon S3 to self\-managed NFS\.
++ [Transferring data from a cloud file system to another cloud file system or Amazon S3](using-ec2-agent-in-region.md#efs-efs) – Transfer data from Amazon EFS to Amazon EFS, from self\-managed NFS to EFS, or to Amazon S3\.
++ [Transferring data from Amazon S3 to cloud file systems](using-ec2-agent-in-region.md#s3-cloud-nfs) – Transfer data from Amazon S3 to Amazon EFS, or from Amazon S3 to self\-managed NFS\.
 
 ### Creating a task to transfer from in\-cloud NFS to in\-cloud NFS or Amazon S3<a name="task-efs-efs"></a>
 
-Use the following instructions to transfer data from an in\-cloud NFS file system to AWS\. To perform this transfer, the DataSync agent must be located in the same AWS Region and same AWS account where the file system is deployed\. This type of transfer includes transfers from EFS to EFS, transfers from self\-managed NFS to Amazon EFS, and transfers to Amazon S3\. For information about how in\-cloud NFS to in\-cloud NFS or Amazon S3 works, see [Data transfer from in\-cloud file system to in\-cloud file system or Amazon S3](using-ec2-agent-in-region.md#efs-efs)\.
+Use the following instructions to transfer data from an in\-cloud NFS file system to AWS\. To perform this transfer, the DataSync agent must be located in the same AWS Region and same AWS account where the file system is deployed\. This type of transfer includes transfers from EFS to EFS, transfers from self\-managed NFS to Amazon EFS, and transfers to Amazon S3\. For information about how in\-cloud NFS to in\-cloud NFS or Amazon S3 works, see [Transferring data from a cloud file system to another cloud file system or Amazon S3](using-ec2-agent-in-region.md#efs-efs)\.
 
 **Note**  
 Deploy the agent in the AWS Region and AWS account where the source EFS or self\-managed NFS file system resides\.
@@ -86,7 +87,7 @@ Deploy the agent in the AWS Region and AWS account where the source EFS or self\
 
    1. Make sure that the security group of source EFS or NFS allows inbound traffic from the agent\. In addition, make sure that the agent allows outbound traffic to the source EFS or NFS\. The traffic goes through the standard NFS port, 2049\.
 
-   For the complete set of network requirements for DataSync, see [Network requirements](datasync-network.md)\.
+   For the complete set of network requirements for DataSync, see [AWS DataSync network requirements](datasync-network.md)\.
 
 1. Choose **Review and Launch** to review your configuration, then choose **Launch** to launch your instance\. Remember to use a key pair that's accessible to you\. A confirmation page appears and indicates that your instance is launching\.
 
@@ -115,7 +116,7 @@ Next, you create a task to transfer data\.
 
 1. Enter an agent name that you can easily identify later, and choose **Create agent** when done\. You can optionally add tags to the agent\.
 
-1. Choose **Tasks** from the navigation pane\. 
+1. Choose **Tasks** from the left navigation pane\. 
 
 1. Choose **On\-premises to AWS**, and choose **Next** to open the **Source configuration** page\.
 
@@ -150,7 +151,7 @@ Next, you create a task to transfer data\.
 
 ### Creating a task to transfer from Amazon S3 to in\-cloud NFS<a name="task-s3-cloud-nfs"></a>
 
-Use the following instructions to transfer data from Amazon S3 to an in\-cloud NFS file system that's located in the same AWS account and AWS Region where the agent is deployed\. This approach includes transfers from Amazon S3 to EFS, or from Amazon S3 to self\-managed NFS\. The following diagram illustrates this type of transfer\. For information about how Amazon S3 to in\-cloud NFS works, see [Data transfer from S3 to in\-cloud file systems](using-ec2-agent-in-region.md#s3-cloud-nfs)\.
+Use the following instructions to transfer data from Amazon S3 to an in\-cloud NFS file system that's located in the same AWS account and AWS Region where the agent is deployed\. This approach includes transfers from Amazon S3 to EFS, or from Amazon S3 to self\-managed NFS\. The following diagram illustrates this type of transfer\. For information about how Amazon S3 to in\-cloud NFS works, see [Transferring data from Amazon S3 to cloud file systems](using-ec2-agent-in-region.md#s3-cloud-nfs)\.
 
 #### Deploying the DataSync agent on an Amazon EC2 instance to write to your destination location<a name="task-ec2-deploy-agent-s3"></a>
 
@@ -228,10 +229,10 @@ These options control the behavior of a task execution\. Behavior includes prese
 For more information about configuring a DataSync task, see [Configure task settings](create-task.md)\. 
 
 The available options are as follows:
-+ **Data verification options** – Task data verification options specify how to verify data that's transferred by the task\. For more information about configuring these options, see [Data verification options](create-task.md#configure-data-verification-options)\. 
-+ **Ownership and permissions\-related options** – DataSync preserves metadata between storage systems that have similar metadata structures\. Depending on the storage system type, different options are used to configure such metadata preservation\. For more information about configuring these options, see [Ownership and permissions\-related options](create-task.md#configure-ownership-and-permissions)\. 
-+ **File metadata options and file management** – You can configure DataSync tasks to copy file metadata, to keep deleted files, and to overwrite files in the destination\. For more information about configuring file metadata and file management options, see [File metadata options and file management](create-task.md#configure-file)\. 
-+ **Bandwidth options** – You can configure a bandwidth limit for DataSync tasks\. For more information about configuring bandwidth options, see [Bandwidth options](create-task.md#configure-bandwidth)\.
-+ **Filtering options** – When you transfer data from your source to your destination location, you can apply filters to transfer only a subset of the files in your source location\. For more information about configuring filtering options, see [Filtering options](create-task.md#configure-filter)\.
-+ **Scheduling and queueing options** – You can schedule a DataSync task to be run at a specific time\. If you are using a single agent to run multiple tasks, you can queue those tasks\. For more information about configuring scheduling and queueing options, see [Scheduling and queueing options](create-task.md#configure-scheduling-queueing)\. 
-+ **Tags and logging options** – You can add one or more tags to a DataSync task\. You can also choose logging options to have DataSync publish logs for individual files or objects to the CloudWatch log group that you specify\. For more information about configuring tags and logging options, see [Tags and logging options](create-task.md#configure-logging)\. 
++ **Data verification** – Task data verification options specify how to verify data that's transferred by the task\. For more information about configuring these options, see [Data verification options](create-task.md#configure-data-verification-options)\. 
++ **Ownership and permissions** – DataSync preserves metadata between storage systems that have similar metadata structures\. Depending on the storage system type, different options are used to configure such metadata preservation\. For more information about configuring these options, see [Ownership and permissions\-related options](create-task.md#configure-ownership-and-permissions)\. 
++ **File metadata and management** – You can configure DataSync tasks to copy file metadata, keep deleted files, and overwrite files in the destination\. For more information, see [File metadata and management options](create-task.md#configure-file)\. 
++ **Bandwidth** – You can configure a bandwidth limit for DataSync tasks\. For more information about configuring bandwidth options, see [Bandwidth options](create-task.md#configure-bandwidth)\.
++ **Filtering** – When you transfer data from your source to your destination location, you can apply filters to transfer only a subset of the files in your source location\. For more information about configuring filtering options, see [Filtering options](create-task.md#configure-filter)\.
++ **Scheduling and queueing** – You can schedule a DataSync task to be run at a specific time\. If you are using a single agent to run multiple tasks, you can queue those tasks\. For more information about configuring scheduling and queueing options, see [Scheduling and queueing options](create-task.md#configure-scheduling-queueing)\. 
++ **Tags and logging** – You can add one or more tags to organize a DataSync task\. For logging, you can have DataSync publish logs for individual files or objects to the CloudWatch log group that you specify\. For more information about configuring tags and logging options, see [Tags and logging options](create-task.md#configure-logging)\. 

@@ -21,5 +21,5 @@ Deleting doesn't remove the agent's virtual machine \(VM\) from your environment
 
 1. Wait until the old agent is deleted and the VM is ready to be activated, usually about three minutes\. Alternatively, you can verify that the agent has been deleted by checking the status of port 80\. When the VM is ready to be activated, port 80 will be open\.
 
-1. Create and activate a new DataSync agent on the existing VM or Amazon EC2 instance\. For information about creating a DataSync agent, see [Creating and activating a DataSync agent](activating-agent.md)\. The new agent can be activated in a different AWS Region, depending on network connectivity\. 
+1. Create and activate a new DataSync agent on the existing VM or Amazon EC2 instance\. For information about creating a DataSync agent, see [Creating an AWS DataSync agent](activating-agent.md)\. The new agent can be activated in a different AWS Region, depending on network connectivity\. 
 

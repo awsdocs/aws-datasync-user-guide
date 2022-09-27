@@ -7,9 +7,10 @@ By default, IAM identities \(users, groups, and roles\) don't have permission to
 **Topics**
 + [Overview of managing access permissions for DataSync](managing-access-overview.md)
 + [Using identity\-based policies \(IAM policies\) for DataSync](using-identity-based-policies.md)
++ [Granting permission to tag AWS DataSync resources during creation](supported-iam-actions-tagging.md)
 + [Cross\-service confused deputy prevention](cross-service-confused-deputy-prevention.md)
 + [DataSync API permissions: Actions and resources](datasync-api-permissions-ref.md)
 
-The following sections provide details on how you can use [AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) and DataSync to help secure your resources by controlling who can access them: 
+The following sections provide details on how you can use [AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) and DataSync to help secure your resources by controlling who can access them\. 
 + [Authentication](managing-access-overview.md#authentication)
 + [Permissions](managing-access-overview.md#access-control) 

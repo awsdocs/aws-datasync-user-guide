@@ -1,16 +1,19 @@
 # CreateLocationEfs<a name="API_CreateLocationEfs"></a>
 
-Creates an endpoint for an Amazon EFS file system\.
+Creates an endpoint for an Amazon EFS file system that AWS DataSync can access for a transfer\. For more information, see [Creating a location for Amazon EFS](https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html)\.
 
 ## Request Syntax<a name="API_CreateLocationEfs_RequestSyntax"></a>
 
 ```
 {
+   "AccessPointArn": "string",
    "Ec2Config": { 
       "SecurityGroupArns": [ "string" ],
       "SubnetArn": "string"
    },
    "EfsFilesystemArn": "string",
+   "FileSystemAccessRoleArn": "string",
+   "InTransitEncryption": "string",
    "Subdirectory": "string",
    "Tags": [ 
       { 
@@ -27,33 +30,49 @@ For information about the parameters that are common to all actions, see [Common
 
 The request accepts the following data in JSON format\.
 
- ** [Ec2Config](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-Ec2Config"></a>
-The subnet and security group that the Amazon EFS file system uses\. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified\.  
-The exact relationship between security group M \(of the mount target\) and security group S \(which you provide for DataSync to use at this stage\) is as follows:   
-+  Security group M \(which you associate with the mount target\) must allow inbound access for the Transmission Control Protocol \(TCP\) on the NFS port \(2049\) from security group S\. You can enable inbound connections either by IP address \(CIDR range\) or security group\. 
-+ Security group S \(provided to DataSync to access EFS\) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets\. You can enable outbound connections either by IP address \(CIDR range\) or security group\.
+ ** [AccessPointArn](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-AccessPointArn"></a>
+Specifies the Amazon Resource Name \(ARN\) of the access point that DataSync uses to access the Amazon EFS file system\.  
+Type: String  
+Length Constraints: Maximum length of 128\.  
+Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$`   
+Required: No
 
-  For information about security groups and mount targets, see [Security Groups for Amazon EC2 Instances and Mount Targets](https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access) in the *Amazon EFS User Guide\.* 
+ ** [Ec2Config](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-Ec2Config"></a>
+Specifies the subnet and security groups DataSync uses to access your Amazon EFS file system\.  
 Type: [Ec2Config](API_Ec2Config.md) object  
 Required: Yes
 
  ** [EfsFilesystemArn](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-EfsFilesystemArn"></a>
-The Amazon Resource Name \(ARN\) for the Amazon EFS file system\.  
+Specifies the ARN for the Amazon EFS file system\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$`   
 Required: Yes
 
+ ** [FileSystemAccessRoleArn](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-FileSystemAccessRoleArn"></a>
+Specifies an AWS Identity and Access Management \(IAM\) role that DataSync assumes when mounting the Amazon EFS file system\.  
+Type: String  
+Length Constraints: Maximum length of 2048\.  
+Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$`   
+Required: No
+
+ ** [InTransitEncryption](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-InTransitEncryption"></a>
+Specifies whether you want DataSync to use Transport Layer Security \(TLS\) 1\.2 encryption when it copies data to or from the Amazon EFS file system\.  
+If you specify an access point using `AccessPointArn` or an IAM role using `FileSystemAccessRoleArn`, you must set this parameter to `TLS1_2`\.  
+Type: String  
+Valid Values:` NONE | TLS1_2`   
+Required: No
+
  ** [Subdirectory](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-Subdirectory"></a>
-A subdirectory in the location’s path\. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination\. By default, AWS DataSync uses the root directory\.  
- `Subdirectory` must be specified with forward slashes\. For example, `/path/to/folder`\.
+Specifies a mount path for your Amazon EFS file system\. This is where DataSync reads or writes data \(depending on if this is a source or destination location\)\. By default, DataSync uses the root directory, but you can also include subdirectories\.  
+You must specify a value with forward slashes \(for example, `/path/to/folder`\)\.
 Type: String  
 Length Constraints: Maximum length of 4096\.  
 Pattern: `^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]*$`   
 Required: No
 
  ** [Tags](#API_CreateLocationEfs_RequestSyntax) **   <a name="DataSync-CreateLocationEfs-request-Tags"></a>
-The key\-value pair that represents a tag that you want to add to the resource\. The value can be an empty string\. This value helps you manage, filter, and search for your resources\. We recommend that you create a name tag for your location\.  
+Specifies the key\-value pair that represents a tag that you want to add to the resource\. The value can be an empty string\. This value helps you manage, filter, and search for your resources\. We recommend that you create a name tag for your location\.  
 Type: Array of [TagListEntry](API_TagListEntry.md) objects  
 Array Members: Minimum number of 0 items\. Maximum number of 50 items\.  
 Required: No
@@ -73,7 +92,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [LocationArn](#API_CreateLocationEfs_ResponseSyntax) **   <a name="DataSync-CreateLocationEfs-response-LocationArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon EFS file system location that is created\.  
+The Amazon Resource Name \(ARN\) of the Amazon EFS file system location that you create\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$` 
@@ -92,38 +111,65 @@ HTTP Status Code: 400
 
 ## Examples<a name="API_CreateLocationEfs_Examples"></a>
 
-### Example<a name="API_CreateLocationEfs_Example_1"></a>
+### Sample Request<a name="API_CreateLocationEfs_Example_1"></a>
 
-The following example creates an endpoint for an Amazon EFS file system\.
+The following example creates a location for an Amazon EFS file system\.
 
-#### Sample Request<a name="API_CreateLocationEfs_Example_1_Request"></a>
+#### <a name="w326aac37b7c14c15b3b5"></a>
 
 ```
 {
-  "Ec2Config": {
-     SecurityGroupArns": ["arn:aws:ec2:us-east-2:11122233344:security-group/sg-0117195988293d62f"],
-     "SubnetArn": "arn:aws:ec2:us-east-2:11122233344:subnet/subnet-f45a0e678",
-  },
-  "EfsFilesystemArn" :"arn:aws:elasticfilesystem:us-east-2:111222333444:file-system/fs-12345efs",
-  "Subdirectory": "/MySubdirectory",
-  "Tags": [
-        {
-           "Key": "Name",
-           "Value": "ElasticFileSystem-1"
-        }
-      ]
+    "Ec2Config": {
+        "SubnetArn": "arn:aws:ec2:us-east-2:11122233344:subnet/subnet-1234567890abcdef1",
+        "SecurityGroupArns": [
+            "arn:aws:ec2:us-east-2:11122233344:security-group/sg-1234567890abcdef2"
+        ]
+    },
+    "EfsFilesystemArn": "arn:aws:elasticfilesystem:us-east-2:111222333444:file-system/fs-021345abcdef6789",
+    "Subdirectory": "/mount/path",
+    "Tags": [{
+        "Key": "Name",
+        "Value": "ElasticFileSystem-1"
+    }]
 }
 ```
 
-### Example<a name="API_CreateLocationEfs_Example_2"></a>
+### Sample Request: Creating a location for a restricted Amazon EFS file system<a name="API_CreateLocationEfs_Example_2"></a>
 
-The response returns the Amazon Resource Name \(ARN\) of the EFS location\.
+The following example creates a location for an Amazon EFS file system with restricted access\. In this kind of scenario, you might have to specify values for `AccessPointArn`, `FileSystemAccessRoleArn`, and `InTransitEncryption` in your request\.
 
-#### Sample Response<a name="API_CreateLocationEfs_Example_2_Response"></a>
+#### <a name="w326aac37b7c14c15b5b5"></a>
 
 ```
 {
-  "LocationArn": "arn:aws:datasync:us-east-2:111222333444:location/loc-07db7abfc326c50fb"
+    "AccessPointArn": "arn:aws:elasticfilesystem:us-east-2:111222333444:access-point/fsap-1234567890abcdef0",
+    "Ec2Config": {
+        "SubnetArn": "arn:aws:ec2:us-east-2:111222333444:subnet/subnet-1234567890abcdef1",
+        "SecurityGroupArns": [
+            "arn:aws:ec2:us-east-2:111222333444:security-group/sg-1234567890abcdef2"
+        ]
+    },
+    "FileSystemAccessRoleArn": "arn:aws:iam::111222333444:role/AwsDataSyncFullAccessNew",
+    "InTransitEncryption": "TLS1_2",
+    "LocationArn": "arn:aws:datasync:us-east-2:111222333444:location/loc-abcdef01234567890",
+    "LocationUri": "efs://us-east-2.fs-021345abcdef6789/",
+    "Subdirectory": "/mount/path",
+    "Tags": [{
+        "Key": "Name",
+        "Value": "ElasticFileSystem-1"
+    }]
+}
+```
+
+### Sample Response<a name="API_CreateLocationEfs_Example_3"></a>
+
+A response returns the location ARN of the Amazon EFS file system\.
+
+#### <a name="w326aac37b7c14c15b7b5"></a>
+
+```
+{
+  "LocationArn": "arn:aws:datasync:us-east-2:111222333444:location/loc-12abcdef012345678"
 }
 ```
 

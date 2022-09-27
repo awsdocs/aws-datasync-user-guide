@@ -1,21 +1,10 @@
-# Deploying your DataSync agent in AWS Regions<a name="using-ec2-agent-in-region"></a>
+# Deploying your DataSync agent in an AWS Region<a name="using-ec2-agent-in-region"></a>
 
-This section describes data transfer between in\-cloud file systems and Amazon S3 bucket using a AWS DataSync agent deployed as an Amazon EC2 instance\. 
+The following guidance can help with common scenarios if you deploy an AWS DataSync agent in an AWS Region\. If you don't have an agent yet, see [Deploy your agent as an Amazon EC2 instance](deploy-agents.md#ec2-deploy-agent)\.
 
-**Note**  
-To transfer files or objects between datasets in Amazon S3, Amazon EFS, or Amazon FSx in the same AWS account, you don't need to deploy a DataSync agent\. To learn more, see [Data transfer between AWS storage services](how-datasync-works.md#in-cloud-transfer)\. 
+## Transferring data from a cloud file system to another cloud file system or Amazon S3<a name="efs-efs"></a>
 
-You can use the DataSync agent deployed in an AWS Region to transfer data between in\-cloud file systems and Amazon S3 in different AWS accounts, or between self\-managed in\-cloud file systems and Amazon S3\. 
-
- For more information about deploying a DataSync agent in a Region, see [Deploy your agent as an Amazon EC2 instance](deploy-agents.md#ec2-deploy-agent)\. 
-
-**Topics**
-+ [Data transfer from in\-cloud file system to in\-cloud file system or Amazon S3](#efs-efs)
-+ [Data transfer from S3 to in\-cloud file systems](#s3-cloud-nfs)
-
-## Data transfer from in\-cloud file system to in\-cloud file system or Amazon S3<a name="efs-efs"></a>
-
-To transfer data from one AWS account to another, or from a self\-managed in\-cloud file system, the DataSync agent must be located in the same AWS Region and same AWS account where the source file system is deployed\. This type of transfer includes the following:
+To transfer data between AWS accounts, or from a cloud file system, the DataSync agent must be located in the same AWS Region and AWS account where the source file system resides\. This type of transfer includes the following:
 + Transfers between Amazon EFS or FSx for Windows File Server file systems to AWS storage in a different AWS account\.
 + Transfers from self\-managed file systems to AWS storage services\.
 
@@ -34,7 +23,7 @@ Deploy the agent in the AWS Region and AWS account where the source file system 
 When you're copying between two Amazon EFS file systems in different AWS accounts, we recommend that you use the NFS \(source\) to EFS \(destination\) transfer\.
 When you're copying between two Amazon FSx file systems in different AWS accounts, we recommend that you use the Server Message Block \(SMB\) \(source\) to Amazon FSx \(destination\) transfer\.
 
-## Data transfer from S3 to in\-cloud file systems<a name="s3-cloud-nfs"></a>
+## Transferring data from Amazon S3 to cloud file systems<a name="s3-cloud-nfs"></a>
 
 The following diagram provides a high\-level view of the DataSync architecture for transferring data from Amazon S3 to an in\-cloud file system\. You can use this architecture to transfer data from one AWS account to another, or to transfer data from Amazon S3 to a self\-managed in\-cloud file system\. 
 

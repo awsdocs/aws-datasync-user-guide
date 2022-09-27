@@ -1,12 +1,17 @@
 # FsxProtocol<a name="API_FsxProtocol"></a>
 
-Represents the protocol that AWS DataSync uses to access your Amazon FSx for OpenZFS file system\.
+Specifies the data transfer protocol that AWS DataSync uses to access your Amazon FSx file system\.
 
 ## Contents<a name="API_FsxProtocol_Contents"></a>
 
  ** NFS **   <a name="DataSync-Type-FsxProtocol-NFS"></a>
-Represents the Network File System \(NFS\) protocol that DataSync uses to access your FSx for OpenZFS file system\.  
+Specifies the Network File System \(NFS\) protocol configuration that DataSync uses to access your FSx for OpenZFS file system or FSx for ONTAP file system's storage virtual machine \(SVM\)\.  
 Type: [FsxProtocolNfs](API_FsxProtocolNfs.md) object  
+Required: No
+
+ ** SMB **   <a name="DataSync-Type-FsxProtocol-SMB"></a>
+Specifies the Server Message Block \(SMB\) protocol configuration that DataSync uses to access your FSx for ONTAP file system's SVM\.  
+Type: [FsxProtocolSmb](API_FsxProtocolSmb.md) object  
 Required: No
 
 ## See Also<a name="API_FsxProtocol_SeeAlso"></a>

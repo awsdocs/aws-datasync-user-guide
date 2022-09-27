@@ -1,4 +1,4 @@
-# Starting a task<a name="start-task-execution"></a>
+# Starting an AWS DataSync task with the AWS CLI<a name="start-task-execution"></a>
 
 When a task execution starts, the task execution changes from **LAUNCHING** to **PREPARING** status within about 10 minutes\. The time that the task execution takes to move through its other phases is proportional to the size of your volume\. For information about task execution phases, see [Task execution](how-datasync-works.md#task-executions)\.
 
@@ -25,7 +25,7 @@ aws datasync start-task-execution [...] \
     --VerifyMode=NONE,OverwriteMode=NEVER,PosixPermissions=NONE
 ```
 
-When you run a task, you can optionally configure the task to include specific files, folders, and objects to transfer\. For more information, see [Filtering the data transferred by DataSync](filtering.md)\.
+When you run a task, you can optionally configure the task to include specific files, folders, and objects to transfer\. For more information, see [Filtering data transferred by AWS DataSync](filtering.md)\.
 
 **Note**  
 Each agent can run a single task at a time\.

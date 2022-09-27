@@ -1,6 +1,9 @@
 # DescribeLocationFsxOpenZfs<a name="API_DescribeLocationFsxOpenZfs"></a>
 
-Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path\.
+Provides details about how an AWS DataSync location for an Amazon FSx for OpenZFS file system is configured\.
+
+**Note**  
+Response elements related to `SMB` aren't supported with the `DescribeLocationFsxOpenZfs` operation\.
 
 ## Request Syntax<a name="API_DescribeLocationFsxOpenZfs_RequestSyntax"></a>
 
@@ -35,6 +38,14 @@ Required: Yes
          "MountOptions": { 
             "Version": "string"
          }
+      },
+      "SMB": { 
+         "Domain": "string",
+         "MountOptions": { 
+            "Version": "string"
+         },
+         "Password": "string",
+         "User": "string"
       }
    },
    "SecurityGroupArns": [ "string" ]
@@ -61,8 +72,8 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
 The uniform resource identifier \(URI\) of the FSx for OpenZFS location that was described\.  
 Example: `fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder`   
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [Protocol](#API_DescribeLocationFsxOpenZfs_ResponseSyntax) **   <a name="DataSync-DescribeLocationFsxOpenZfs-response-Protocol"></a>
 The type of protocol that AWS DataSync uses to access your file system\.  

@@ -1,4 +1,4 @@
-# Creating a task<a name="create-task-cli"></a>
+# Creating an AWS DataSync task with the AWS CLI<a name="create-task-cli"></a>
 
 After you have created an agent and configured your source and destination, you create a task, as described following\.
 
@@ -31,7 +31,7 @@ After you have created an agent and configured your source and destination, you 
    }
    ```
 
-   **When creating a task that transfers data between AWS services in different Regions**, and the other location needs to be specified in a different Region \(for example, to transfer data between `us-east-1` and `us-east-2`\), use DataSync in one of the Regions and create a task by using the following command\.
+   **When creating a task that transfers data between AWS services in different Regions**, and the other location must be specified in a different Region \(for example, to transfer data between `us-east-1` and `us-east-2`\), use DataSync in one of the Regions and create a task by using the following command\.
 
    You can transfer data between AWS Regions, except for the China Regions and the AWS GovCloud \(US\) Regions\. You can also transfer data between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions\. 
 
@@ -55,6 +55,6 @@ After you have created an agent and configured your source and destination, you 
        --options VerifyMode=NONE,OverwriteMode=NEVER,Atime=BEST_EFFORT,Mtime=PRESERVE,Uid=INT_VALUE,Gid=INT_VALUE,PreserveDevices=PRESERVE,PosixPermissions=PRESERVE,PreserveDeletedFiles=PRESERVE,TaskQueueing=ENABLED,LogLevel=TRANSFER
    ```
 
-   When you create a task, you can configure the task to include or exclude specific files, folders, and objects\. For more information, see [Filtering the data transferred by DataSync](filtering.md)\. You can also schedule when you want your task to run\. For more information, see [Scheduling your DataSync task](task-scheduling.md)\.
+   When you create a task, you can configure the task to include or exclude specific files, folders, and objects\. For more information, see [Filtering data transferred by AWS DataSync](filtering.md)\. You can also schedule when you want your task to run\. For more information, see [Scheduling your DataSync task](task-scheduling.md)\.
 **Note**  
 If a task remains in the **CREATING** status for more than a few minutes, your agent might be having trouble reaching your self\-managed storage\. Check the task's `ErrorCode` and `ErrorDetail` values\. For example, NFS and SMB mount issues are often caused by a mistyped server hostname, or when the agent's access to your storage is blocked by firewall rules\.

@@ -3,5 +3,5 @@
 AWS DataSync agent and network requirements vary based on where and how you plan to transfer data\.
 
 **Topics**
-+ [Agent requirements](agent-requirements.md)
-+ [Network requirements](datasync-network.md)
++ [AWS DataSync agent requirements](agent-requirements.md)
++ [AWS DataSync network requirements](datasync-network.md)

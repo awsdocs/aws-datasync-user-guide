@@ -7,7 +7,7 @@ After a task execution starts, you can monitor its progress, add or adjust bandw
 **Topics**
 + [Adjusting bandwidth throttling for a task execution](#adjust-bandwidth-throttling)
 + [Task execution statuses](#understand-task-execution-statuses)
-+ [Canceling a DataSync task execution](#cancel-running-task)
++ [Canceling a DataSync task](#cancel-running-task)
 
 ## Adjusting bandwidth throttling for a task execution<a name="adjust-bandwidth-throttling"></a>
 
@@ -35,20 +35,20 @@ You can modify bandwidth throttling for a task execution using the AWS Managemen
 
 ## Task execution statuses<a name="understand-task-execution-statuses"></a>
 
-Following, you can find information about the possible statuses \(phases\) a task execution might go through\.
+When you start a DataSync task, these are the statuses you might see\.
 
 
-| DataSync phase or status | Meaning | 
-| --- | --- | 
-|  **QUEUEING**  |  This is the first phase of a task execution if there is another task running and it's using the same agent\. For more information, see [Queueing task executions](run-task.md#queue-task-execution)\.  | 
-|  **LAUNCHING**  |  This is the first phase of a task execution if there is no other task running and using the same agent or if queueing isn't enabled\. At this point, AWS DataSync is initializing the task execution\. This status usually goes quickly, but can take up to a few minutes\.  | 
-|  **PREPARING**  |  This is the second phase of a task execution\. AWS DataSync is computing which files need to be transferred\. The time that this phase takes is proportional to the number of files in the source location\. It usually takes between a few minutes to a few hours, depending on both the source and destination file systems and the performance of these file systems\. For more information, see [Starting your DataSync task](run-task.md)\.  | 
-|  **TRANSFERRING**  |  This is the third phase of a task execution\. DataSync is performing the actual transfer of your data to AWS\. While the DataSync is transferring files, the number of bytes and files that are transferred is updated in real time\.  | 
-|  **VERIFYING**  |  This is the fourth and optional phase of a task execution\. If the `VerifyMode` sync option is set to **POINT\_IN\_TIME\_CONSISTENT**, DataSync performs a full data and metadata integrity verification\. This verification ensures that the data in your destination is an exact copy of the data in your source location\. This process requires reading back all files in the destination and can take a significant amount of time on very large volumes\. If you want to skip verification, specify `VerifyMode=NONE` when configuring the task execution\. Alternatively, in your task's options in the console, don't choose **Enable verification**\. For more information, see [How AWS DataSync verifies data integrity](how-datasync-works.md#how-verifying-works)\.  | 
-|  **SUCCESS**  |  This value is returned if the data transfer is successful\. If the `VerifyMode` option isn't set, this status occurs after the **TRANSFERRING** phase\. Otherwise, it occurs after the **VERIFYING** phase\. For more information, see [Task execution](how-datasync-works.md#task-executions)\.  | 
-|  **ERROR**  |  This value is returned if the data transfer fails\. If the `VerifyMode` option isn't set, this status occurs after the **TRANSFERRING** phase\. Otherwise, it occurs after the **VERIFYING** phase\.  | 
+| Console status | API status | Description | 
+| --- | --- | --- | 
+|  Queueing  |  `QUEUED`  |  This is the first phase of a task execution if there is another task running and it's using the same agent\. For more information, see [Queueing task executions](run-task.md#queue-task-execution)\.  | 
+|  Launching  |  `LAUNCHING`  |  This is the first phase of a task execution if there is no other task running and using the same agent or if queueing isn't enabled\. At this point, AWS DataSync is initializing the task execution\. This status usually goes quickly, but can take up to a few minutes\.  | 
+|  Preparing  |  `PREPARING`  |  This is the second phase of a task execution\. AWS DataSync is computing which files need to be transferred\. The time that this phase takes is proportional to the number of files in the source location\. It usually takes between a few minutes to a few hours, depending on both the source and destination file systems and the performance of these file systems\. For more information, see [Starting your DataSync task](run-task.md)\.  | 
+|  Transferring  |  `TRANSFERRING`  |  This is the third phase of a task execution\. DataSync is performing the actual transfer of your data to AWS\. While the DataSync is transferring files, the number of bytes and files that are transferred is updated in real time\.  | 
+|  Verifying  |  `VERIFYING`  |  This is the fourth and optional phase of a task execution\. If the `VerifyMode` operation is set to `POINT_IN_TIME_CONSISTENT`, DataSync performs a full data and metadata integrity verification\. This verification ensures that the data in your destination location is an exact copy of the data in your source\. This process requires reading back all files in the destination and can take a significant amount of time on very large volumes\. If you want to skip verification, specify the `VerifyMode` operation to `NONE`\. For more information, see [How DataSync verifies data integrity](how-datasync-works.md#how-verifying-works)\.  | 
+|  Success  |  `SUCCESS`  |  This value is returned if the data transfer is successful\. If the `VerifyMode` operation isn't set, this status occurs after the **Transferring** phase\. Otherwise, it occurs after the **Verifying** phase\. For more information, see [Task execution](how-datasync-works.md#task-executions)\.  | 
+|  Error  |  `ERROR`  |  This value is returned if the data transfer fails\. If the `VerifyMode` option isn't set, this status occurs after the **Transferring** phase\. Otherwise, it occurs after the **Verifying** phase\.  | 
 
-## Canceling a DataSync task execution<a name="cancel-running-task"></a>
+## Canceling a DataSync task<a name="cancel-running-task"></a>
 
  Using the console, you can cancel any task execution that is currently running or that is queued\. You can also cancel a task execution using the API\. For more information, see [CancelTaskExecution](https://docs.aws.amazon.com/datasync/latest/userguide/API_CancelTaskExecution.html)\. 
 

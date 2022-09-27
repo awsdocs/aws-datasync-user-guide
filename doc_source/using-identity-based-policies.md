@@ -1,6 +1,6 @@
 # Using identity\-based policies \(IAM policies\) for DataSync<a name="using-identity-based-policies"></a>
 
-An account administrator can attach identity\-based policies to IAM identities \(that is, users, groups, and roles\)\. You can also attach identity\-based policies to service roles\.
+An account administrator can attach identity\-based policies to AWS Identity and Access Management \(IAM\) identities \(that is, users, groups, and roles\)\. You can also attach identity\-based policies to service roles\.
 
 This topic provides examples of identity\-based policies that you can use to grant permissions to IAM identities\. 
 
@@ -41,7 +41,7 @@ AWS creates and administers standalone IAM policies\. These managed policies gra
 The managed policies that are created by AWS grant the required permissions for common use cases\. You can attach these policies to your IAM users, groups, and roles, based on the access that they need to DataSync:
 
 The following AWS managed policies, which you can attach to users in your account, are specific to DataSync:
-+ **[AWSDataSyncReadOnlyAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSDataSyncReadOnlyAccess$jsonEditor)** – Provides read\-only access to AWS DataSync\. 
++ **[AWSDataSyncReadOnlyAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSDataSyncReadOnlyAccess$jsonEditor)** – Provides read\-only access to AWS DataSync\.
 + ** [AWSDataSyncFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSDataSyncFullAccess$jsonEditor)** – Provides full access to AWS DataSync and minimal access to its dependencies\.
 
  

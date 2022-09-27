@@ -98,8 +98,8 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
  ** [LocationUri](#API_DescribeLocationHdfs_ResponseSyntax) **   <a name="DataSync-DescribeLocationHdfs-response-LocationUri"></a>
 The URI of the HDFS cluster location\.  
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [NameNodes](#API_DescribeLocationHdfs_ResponseSyntax) **   <a name="DataSync-DescribeLocationHdfs-response-NameNodes"></a>
 The NameNode that manage the HDFS namespace\.   

@@ -1,6 +1,6 @@
 # DataSync API permissions: Actions and resources<a name="datasync-api-permissions-ref"></a>
 
-When creating IAM policies, this page can help you understand the relationship between AWS DataSync API operations, the corresponding actions that you can grant permissions to perform, and the AWS resources for which you can grant the permissions\.
+When creating AWS Identity and Access Management \(IAM\) policies, this page can help you understand the relationship between AWS DataSync API operations, the corresponding actions that you can grant permissions to perform, and the AWS resources for which you can grant the permissions\.
 
 In general, here's how you add DataSync permissions to your policy:
 + Specify an action in the `Action` element\. The value includes a `datasync:` prefix and the API operation name\. For example, `datasync:CreateTask`\.

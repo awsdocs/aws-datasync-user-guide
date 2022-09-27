@@ -60,7 +60,7 @@ Type: Timestamp
 The name of the Windows domain that the SMB server belongs to\.  
 Type: String  
 Length Constraints: Maximum length of 253\.  
-Pattern: `^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$` 
+Pattern: `^[A-Za-z0-9]((\.|-+)?[A-Za-z0-9]){0,252}$` 
 
  ** [LocationArn](#API_DescribeLocationSmb_ResponseSyntax) **   <a name="DataSync-DescribeLocationSmb-response-LocationArn"></a>
 The Amazon Resource Name \(ARN\) of the SMB location that was described\.  
@@ -71,8 +71,8 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
  ** [LocationUri](#API_DescribeLocationSmb_ResponseSyntax) **   <a name="DataSync-DescribeLocationSmb-response-LocationUri"></a>
 The URL of the source SMB location that was described\.  
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [MountOptions](#API_DescribeLocationSmb_ResponseSyntax) **   <a name="DataSync-DescribeLocationSmb-response-MountOptions"></a>
 The mount options that are available for DataSync to use to access an SMB location\.  

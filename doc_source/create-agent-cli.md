@@ -1,22 +1,22 @@
-# Creating an agent<a name="create-agent-cli"></a>
+# Creating an AWS DataSync agent with the AWS CLI<a name="create-agent-cli"></a>
 
-To access your self\-managed storage, you first deploy and activate an AWS DataSync agent\. The activation process associates your agent with your AWS account\. An agent isn't required when transferring between AWS storage services within the same AWS account\. To set up a data transfer between two AWS services, see [Creating locations](create-locations-cli.md)\.
+To access your self\-managed storage, you first deploy and activate an AWS DataSync agent\. The activation process associates your agent with your AWS account\. An agent isn't required when transferring between AWS storage services within the same AWS account\. To set up a data transfer between two AWS services, see [Creating AWS DataSync locations with the AWS CLI](create-locations-cli.md)\.
 
-A DataSync agent can transfer data through public service endpoints, Federal Information Processing Standard \(FIPS\) endpoints, and Amazon VPC endpoints\. For more information, see [Creating and activating a DataSync agent](activating-agent.md)\.
+A DataSync agent can transfer data through public service endpoints, Federal Information Processing Standard \(FIPS\) endpoints, and Amazon VPC endpoints\. For more information, see [Creating an AWS DataSync agent](activating-agent.md)\.
 
 **Note**  
 When you configure your agent to use Amazon VPC endpoints, the data transferred between your agent and the DataSync service doesn't cross the public internet and doesn't require public IP addresses\. For end\-to\-end instructions for this configuration, see [Using AWS DataSync in a virtual private cloud](datasync-in-vpc.md)\.
 
 **To create an agent to read from a Network File System \(NFS\), Server Message Block \(SMB\), Hadoop Distributed File System \(HDFS\), or self\-managed object storage source location**
 
-1. Download the current DataSync `.ova` image or launch the current DataSync Amazon Machine Image \(AMI\) based on Amazon EC2 from the AWS DataSync console\. For information about how to get the `.ova` image or Amazon EC2 AMI, see [Create an agent](configure-agent.md)\. For information about hardware requirements and recommended Amazon EC2 instance types, see [Virtual machine requirements](agent-requirements.md#hardware)\.
+1. Download the current DataSync `.ova` image or launch the current DataSync Amazon Machine Image \(AMI\) based on Amazon EC2 from the AWS DataSync console\. For information about how to get the `.ova` image or Amazon EC2 AMI, see [Create an AWS DataSync agent](configure-agent.md)\. For information about hardware requirements and recommended Amazon EC2 instance types, see [Virtual machine requirements](agent-requirements.md#hardware)\.
 **Important**  
 If you are deploying your agent on Amazon EC2, deploy the agent so that it doesn't require network traffic between Availability Zones \(to avoid charges for such traffic\)\.  
 To access your Amazon EFS or Amazon FSx for Windows File Server file system, deploy the agent in an Availability Zone that has a mount target to your file system\.
 For self\-managed file systems, deploy the agent in the Availability Zone where your file system resides\.
 To learn more about data\-transfer prices for all AWS Regions, see [Amazon EC2 On\-Demand pricing](http://aws.amazon.com/ec2/pricing/on-demand/)\. 
 
-1. Make sure that you satisfy the network\-connectivity requirements for the agent\. For information about network requirements, see [Network requirements](datasync-network.md)\.
+1. Make sure that you satisfy the network\-connectivity requirements for the agent\. For information about network requirements, see [AWS DataSync network requirements](datasync-network.md)\.
 
 1. Deploy the `.ova` image in your hypervisor, power on the hypervisor, and note the agent's IP address\. Make sure that you can reach the agent on port 80\. You can use the following command to check\.
 
@@ -57,14 +57,14 @@ You log in to the agent VM local console by using your VM's hypervisor client\. 
 
      ```
      aws datasync create-agent \
-       --agent-name agent-name \
+       --agent-name agent-name-you-specify \
        --activation-key obtained-activation-key
      ```
    + To activate your agent using a VPC endpoint, use the following command\.
 
      ```
      aws datasync create-agent \
-       --agent-name agent-name \
+       --agent-name agent-name-you-specify \
        --vpc-endpoint-id vpc-endpoint-id \
        --subnet-arns subnet-arns \
        --security-group-arns security-group-arns \

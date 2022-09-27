@@ -31,7 +31,7 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
 Required: Yes
 
  ** [MountOptions](#API_UpdateLocationNfs_RequestSyntax) **   <a name="DataSync-UpdateLocationNfs-request-MountOptions"></a>
-Represents the mount options that are available for DataSync to access an NFS location\.  
+Specifies how DataSync can access a location using the NFS protocol\.  
 Type: [NfsMountOptions](API_NfsMountOptions.md) object  
 Required: No
 

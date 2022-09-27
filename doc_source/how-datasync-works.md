@@ -1,72 +1,66 @@
 # How AWS DataSync works<a name="how-datasync-works"></a>
 
-In this section, you can find information about components, terms, and how DataSync works\.
+Get a visual overview of how AWS DataSync works and learn key concepts to help you move your data quickly\.
+
+## DataSync architecture<a name="datasync-archtecture"></a>
 
 **Topics**
-+ [AWS DataSync architecture](#datasync-archtecture)
-+ [Components and terminology](#terminology)
-+ [How DataSync transfers files](#transfering-files)
++ [Transferring between on\-premises storage and AWS](#onprem-aws)
++ [Transferring between AWS storage services](#in-cloud-transfer)
++ [Transferring between cloud storage systems and AWS storage services](#ec2-agent-in-region)
 
-## AWS DataSync architecture<a name="datasync-archtecture"></a>
+The following diagrams show how and where DataSync commonly transfers storage data\. 
 
-**Topics**
-+ [Data transfer between self\-managed storage and AWS](#onprem-aws)
-+ [Data transfer between AWS storage services](#in-cloud-transfer)
-+ [Data transfer using an agent deployed in a Region](#ec2-agent-in-region)
+For a full list of DataSync supported storage systems and services, see [Working with AWS DataSync locations](working-with-locations.md)\.
 
-The architectural diagrams show how DataSync transfers data between on\-premises \(self\-managed\) storage systems and AWS storage services, and between in\-cloud storage systems and AWS storage services\. 
+### Transferring between on\-premises storage and AWS<a name="onprem-aws"></a>
 
-For a list of all DataSync supported source and destination endpoints, see [Working with locations](working-with-locations.md)\.
+The following diagram shows a high\-level overview of DataSync transferring files between self\-managed, on\-premises storage systems and AWS services\.
 
-### Data transfer between self\-managed storage and AWS<a name="onprem-aws"></a>
+![\[An overview of a common DataSync scenario where data transfers from an on-premises storage system to a supported AWS storage resource (such as an Amazon S3 bucket or Amazon EFS file system).\]](http://docs.aws.amazon.com/datasync/latest/userguide/images/DataSync-chart-on-prem.png)
 
-The following diagram shows a high\-level view of the DataSync architecture for transferring files between self\-managed storage and AWS services\.
+The diagram illustrates a common DataSync use case:
++ A DataSync agent copying data from an on\-premises storage system\.
++ Data moving into AWS via Transport Layer Security \(TLS\)\.
++ DataSync copying data to a supported AWS storage service\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/datasync/latest/userguide/images/DataSync-chart-on-prem.png)
+### Transferring between AWS storage services<a name="in-cloud-transfer"></a>
 
-### Data transfer between AWS storage services<a name="in-cloud-transfer"></a>
+The following diagram shows a high\-level overview of DataSync transferring files between AWS services in the same AWS account\.
 
-The following diagram provides a high\-level view of the DataSync architecture for transferring files between AWS services within the same AWS account\. This architecture applies to both in\-Region and cross\-Region transfers\.
+![\[An overview of a common DataSync scenario where data transfers between AWS storage resources (such as an Amazon S3 bucket or Amazon EFS file system).\]](http://docs.aws.amazon.com/datasync/latest/userguide/images/DataSync-chart-agentless.png)
 
-With these kinds of transfers, traffic remains in the AWS network and doesn't traverse the public internet\.
+The diagram illustrates a common DataSync use case:
++ DataSync copying data from a supported AWS storage service\.
++ Data moving across AWS Regions via TLS\.
++ DataSync copying data to a supported AWS storage service\. 
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/datasync/latest/userguide/images/DataSync-chart-agentless.png)
+When transferring between AWS storage services \(whether in the same AWS Region or across AWS Regions\), your data remains in the AWS network and doesn't traverse the public internet\.
 
 **Important**  
-When you use DataSync to copy files or objects between AWS Regions, you pay for data transfer between Regions\. This is billed as data transfer OUT from your source Region to your destination Region\. For more information, see [Data transfer pricing](http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer)\. 
+You pay for data transferred between AWS Regions\. This is billed as data transfer OUT from your source Region to your destination Region\. For more information, see [Data transfer pricing](http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer)\.
 
-### Data transfer using an agent deployed in a Region<a name="ec2-agent-in-region"></a>
+### Transferring between cloud storage systems and AWS storage services<a name="ec2-agent-in-region"></a>
 
-You can use DataSync to transfer data between AWS services in different AWS accounts, or between self\-managed file systems in AWS and Amazon S3\. To do so, you can deploy the DataSync agent as an Amazon EC2 instance in an AWS Region\. For more information, see [Deploying your DataSync agent in AWS Regions](using-ec2-agent-in-region.md)\.
+With DataSync, you can transfer data between cloud storage systems and AWS services\. In this context, cloud storage systems can include:
++ Self\-managed storage systems hosted by AWS \(for example, an NFS share in your virtual private cloud within AWS\)\.
++ Storage systems or services hosted by another cloud provider\.
 
-## Components and terminology<a name="terminology"></a>
+For more information, see the following topics:
++ [Deploying your DataSync agent in an AWS Region](using-ec2-agent-in-region.md)
++ [Tutorial: Transferring data from Google Cloud Storage to Amazon S3](tutorial_transfer-google-cloud-storage.md)
 
-The components of DataSync include the following:
-+ **Agent**: A virtual machine \(VM\) that's used to read data from or write data to a self\-managed location\. An agent isn't required when transferring between AWS storage services in the same AWS account\. 
-+ **Location**: Any source or destination location included in the data transfer\. This can include Amazon S3, Amazon EFS, Amazon FSx for Windows File Server, Amazon FSx for Lustre, Amazon FSx for OpenZFS, Network File System \(NFS\), Server Message Block \(SMB\), Hadoop Distributed File System \(HDFS\), or self\-managed object storage\. 
-+ **Task**: A source location and a destination location, and a configuration that defines how data is transferred\. A task always transfers data from the source to the destination\. The configuration can include options such as the task schedule, bandwidth limit, and so on\. A task is the complete definition of a data transfer\. 
-+ **Task execution**: An individual run of a task, which includes information such as the start time, end time, bytes written, and status\. 
+## Concepts and terminology<a name="terminology"></a>
+
+Familiarize yourself with DataSync features\.
 
 ### Agent<a name="sync-agents"></a>
 
-An *agent* is a VM that you own that's used to read or write data from self\-managed storage systems\. The agent can be deployed on VMware ESXi, Linux Kernel\-based Virtual Machine \(KVM\), Microsoft Hyper\-V hypervisors, or it can be launched as an Amazon EC2 instance\. You use the AWS DataSync console or the API to set up and activate your agent\. The activation process associates your agent VM with your AWS account\. For information about agents, see [Working with agents](working-with-agents.md)\. 
-
-An agent that's functioning properly has the status **ONLINE**\. If an agent is unable to communicate with AWS, it transitions to **OFFLINE** status\. This transition can result from issues with a network partition, firewall misconfiguration, and other events that make the agent VM unable to connect to AWS\. The status of an agent that's powered off also shows as **OFFLINE**\.
+An *agent* is a virtual machine \(VM\) that you own that's used to read or write data from storage systems\. The agent can be deployed on VMware ESXi, Linux Kernel\-based Virtual Machine \(KVM\), Microsoft Hyper\-V hypervisors, or it can be launched as an Amazon EC2 instance\. You use the DataSync console, AWS CLI, or DataSync API to set up and activate your agent\. The activation process associates your agent VM with your AWS account\. For information about agents, see [Working with AWS DataSync agents](working-with-agents.md)\.
 
 ### Location<a name="sync-locations"></a>
 
-A *location* is where you're copying data from and to\. Each task has two locations—a source and destination location\. DataSync supports the following location types: 
-+ Network File System \(NFS\)
-+ Server Message Block \(SMB\)
-+ Hadoop Distributed File System \(HDFS\)
-+ On\-premises \(self\-managed\) object storage
-+ Amazon EFS
-+ Amazon FSx for Windows File Server
-+ Amazon FSx for Lustre
-+ Amazon FSx for OpenZFS
-+ Amazon S3
-
-For more information, see [Working with locations](working-with-locations.md)\.
+A *location* identifies where you're copying data from or to\. Each DataSync transfer \(also known as a *task*\) has a source and destination location\. For more information, see [Working with AWS DataSync locations](working-with-locations.md)\.
 
 ### Task<a name="tasks"></a>
 
@@ -74,53 +68,28 @@ A *task* describes a DataSync transfer\. It identifies a source and destination 
 
 ### Task execution<a name="task-executions"></a>
 
-A *task execution* is an individual run of a task, which shows information such as the start time, end time, number of transferred files, and status\. 
+A *task execution* is an individual run of a DataSync task\. There are several phases involved in a task execution\. For more information, see [Task execution statuses](working-with-task-executions.md#understand-task-execution-statuses)\.
 
-A task execution has five transition phases and two terminal statuses, as shown in the following diagram\. These phases and statuses are:
-+ **QUEUEING** – This phase consists of queuing the task executions that are running using the same agent\.
-+ **LAUNCHING** – During this phase, the task execution is initialized\.
-+ **PREPARING** – During this phase, DataSync computes which files need to be transferred\.
-+ **TRANSFERRING** – During this phase, DataSync transfers data to AWS\.
-+ **VERIFYING** – During this optional phase, DataSync performs a full data and metadata integrity verification\. This phase occurs only if the `VerifyMode` option is enabled during configuration\.
-+ **SUCCESS** or **ERROR** – When the task is finished, DataSync sets the task to one of these terminal statuses, depending on whether it was successful\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/datasync/latest/userguide/images/aws-sync-v8.png)
-
-If the `VerifyMode` option isn't enabled in the task configuration, the terminal status is set after the **TRANSFERRING** phase\. Otherwise, it is set after the **VERIFYING** phase\. The two terminal statuses are these:
-+ **SUCCESS**
-+ **ERROR**
-
-For more information, see [Task execution statuses](working-with-task-executions.md#understand-task-execution-statuses)\.
-
-## How DataSync transfers files<a name="transfering-files"></a>
+## How DataSync transfers files and objects<a name="transfering-files"></a>
 
 **Topics**
-+ [How AWS DataSync verifies data integrity](#how-verifying-works)
++ [How DataSync verifies data integrity](#how-verifying-works)
 + [How DataSync handles open and locked files](#open-locked-files)
 
-When a task starts, it goes through different phases: **LAUNCHING**, **PREPARING**, **TRANSFERRING**, and **VERIFYING**\. In the **LAUNCHING** phase, DataSync initializes the task execution\. In the **PREPARING** phase, DataSync examines the source and destination file systems to determine which files to sync\. It does so by recursively scanning the contents and metadata of files on the source and destination file systems for differences\. 
+When you start a transfer, DataSync examines your source and destination storage systems to determine what to sync\. It does this by recursively scanning the contents and metadata of both systems to identify differences between the two\. This can take just minutes or a few hours depending on the number of files or objects involved \(including the performance of the storage systems\)\.
 
-The time that DataSync spends in the **PREPARING** phase depends on the number of files in both the source and destination file systems\. It also depends on the performance of these file systems\. The **PREPARING** phase can therefore take a few minutes to a few hours\. For more information, see [Starting your DataSync task](run-task.md)\. 
+DataSync then begins moving your data \(including metadata\) from the source to destination based on [how you set up the transfer](create-task.md)\. For example, DataSync always performs data\-integrity checks during a transfer\. When the transfer's complete, DataSync can also verify the entire dataset between locations or just the data you copied\. \(In most cases, we recommend verifying only what was transferred\.\) There are options for filtering what to transfer, too\.
 
-After the scanning is done and the differences are calculated, DataSync transitions to the **TRANSFERRING** phase\. At this point, DataSync starts transferring files and metadata from the source file system to the destination\. DataSync copies changes to files with contents or metadata that are different between the source and the destination\. You can narrow down the copied files by [filtering the data](https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) or by configuring DataSync to [not overwrite files that are already present in the destination](https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode)\. 
+### How DataSync verifies data integrity<a name="how-verifying-works"></a>
 
-**Note**  
-By default, any changes to metadata on the source storage result in this metadata being copied to the destination storage\.
+DataSync locally calculates the checksum of every file or object in the source and destination storage systems and compares them\. Additionally, DataSync compares the metadata of every file or object in the source and destination\. If there are differences in either one, verification fails with an error code that specifies precisely what failed\. For example, you might see error codes such as `Checksum failure`, `Metadata failure`, `Files were added`, `Files were removed`, and so on\. 
 
-After the **TRANSFERRING** phase is done, DataSync verifies consistency between the source and destination file systems\. This is the **VERIFYING** phase\.
-
-When DataSync transfers data, it always performs data\-integrity checks during the transfer\. You can enable additional verification to compare the source and destination at the end of a transfer\. This additional check can verify the entire dataset or only the files that were transferred as part of the task execution\. For most use cases, we recommend verifying only the files that were transferred\.
-
-### How AWS DataSync verifies data integrity<a name="how-verifying-works"></a>
-
-AWS DataSync locally calculates the checksum of every file in the source file system and the destination and compares them\. Additionally, DataSync compares the metadata of every file in the source and destination and compares them\. If there are differences in either one, verification fails with an error code that specifies precisely what failed\. For example, you might see error codes such as `Checksum failure`, `Metadata failure`, `Files were added`, `Files were removed`, and so on\. 
-
- For more information, see [DataSync task creation statuses](understand-task-creation-statuses.md) and **Enable verification** in the [Configuring task settings](creating-task.md#configuring-task) section\.
+For more information, see [Data verification options](create-task.md#configure-data-verification-options)\.
 
 ### How DataSync handles open and locked files<a name="open-locked-files"></a>
 
-In general, DataSync can transfer open files without any limitations\. 
-
-If a file is open and it's being written to during the transfer, DataSync detects data inconsistency during the **VERIFYING** phase\. This phase is when DataSync detects whether the file on the source is different from the file on the destination\. 
-
-If a file is locked and the server prevents DataSync from opening it, DataSync skips transferring it\. DataSync logs an error during the **TRANSFERRING** phase and sends a verification error\.
+Keep in mind the following when trying to transfer files that are in use or locked:
++ In general, DataSync can transfer open files without any limitations\.
++ If a file is open and being written to during a transfer, DataSync can detect this kind of inconsistency during the transfer task's verification phase\. To get the latest version of the file, you must run the task again\.
++ If a file is locked and the server prevents DataSync from opening it, DataSync skips the file during the transfer and logs an error\.
++ DataSync can't lock or unlock files\.

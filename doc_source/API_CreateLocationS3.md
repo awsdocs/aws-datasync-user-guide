@@ -109,7 +109,7 @@ HTTP Status Code: 400
 
 The following example shows the simplest policy that grants the required permissions for AWS DataSync to access a destination Amazon S3 bucket, followed by an IAM role to which the `create-location-s3-iam-role` policy has been attached\.
 
-#### <a name="w142aac37b7c35c17b3b5"></a>
+#### <a name="w326aac37b7c38c17b3b5"></a>
 
 ```
 {
@@ -126,7 +126,7 @@ The following example shows the simplest policy that grants the required permiss
 }
 ```
 
-#### <a name="w142aac37b7c35c17b3b7"></a>
+#### <a name="w326aac37b7c38c17b3b7"></a>
 
 ```
 "Role": {
@@ -159,7 +159,7 @@ For more information, see [AWSDataSyncFullAccess](https://console.aws.amazon.com
 
 You don't need to create this policy\. It's managed by AWS, so all that you need to do is specify its ARN in the `attach-role-policy` command\.
 
-#### <a name="w142aac37b7c35c17b5b9"></a>
+#### <a name="w326aac37b7c38c17b5b9"></a>
 
 ```
 IAM_POLICY_ARN='arn:aws:iam::aws:policy/AWSDataSyncFullAccess'

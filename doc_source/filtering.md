@@ -1,18 +1,18 @@
-# Filtering the data transferred by DataSync<a name="filtering"></a>
+# Filtering data transferred by AWS DataSync<a name="filtering"></a>
 
-When you transfer data from your source to your destination location, you can apply filters to transfer a subset of the files in your source location\. You can use filters to specify files, folders, and objects to exclude or include in your transfer\. For example, if your source location includes temporary files that end with `.tmp`, you can create an exclude filter that ensures that these files aren't transferred to the destination\. 
+AWS DataSync lets you apply filters if you only want to transfer a subset of data \(such as specific files, folders, or objects\)\.
 
-Filtering is an optional configuration to specify if you want to transfer a subset of your source files\. You can keep the filter configuration empty if you want to transfer all files from the source location to the destination location\. You can also use exclude and include filters together in the same task\.
+For example, if your source location includes temporary files that end with `.tmp`, you can create an exclude filter that keeps these files from making their way to the destination location\. You also can use a combination of exclude and include filters in the same task\.
 
 **Topics**
 + [Filtering terms, definitions, and syntax](#filter-overview)
 + [Excluding data from a transfer](#exclude-filters)
 + [Including data in a transfer](#include-filters)
-+ [Sample filters for common uses](#sample-filters)
++ [Example filters](#sample-filters)
 
 ## Filtering terms, definitions, and syntax<a name="filter-overview"></a>
 
-Following are some terms and definitions for use with filtering:
+These are some terms and definitions for use with filtering:
 
 **Filter **  
 The whole string that makes up a particular filter, for example: `*.tmp``|``*.temp` or `/folderA|/folderB`  
@@ -82,9 +82,12 @@ aws datasync start-task-execution
 **Note**  
 Include filters support the wildcard \(\*\) character only as the rightmost character in a pattern\. For example, `/documents*`\|`/code*` is supported, but `*.txt` isn't supported\.
 
-## Sample filters for common uses<a name="sample-filters"></a>
+## Example filters<a name="sample-filters"></a>
 
-In this section, you can find common uses for filtering and sample filters for them\.
+The following examples show common filters you can use with DataSync\.
+
+**Note**  
+When creating your own filters, make sure you know the [Task filter quotas](datasync-limits.md#filter-limits)\.
 
 **Exclude some folders from your source location**  
 In some cases, you might exclude folders in your source location to not copy them to your destination location\. For example, you might have temporary work\-in\-progress folders\. Or you might use a NetApp system and want to exclude NetApp backup folders\. In these cases, you use the following filter\.
@@ -109,6 +112,3 @@ To exclude certain file types from the transfer, you can create a task execution
 
 **Transfer individual files you specify**  
 To transfer a list of individual files, start a task execution with an include filter like the following: "`/folder/subfolder/file1.txt`\|`/folder/subfolder/file2.txt`\|`/folder/subfolder/file2.txt`"
-
-**Note**  
-The filter string length is limited to 409,600 characters\.

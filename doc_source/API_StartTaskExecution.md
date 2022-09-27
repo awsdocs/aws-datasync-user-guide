@@ -28,6 +28,7 @@ For detailed information, see Task Execution in [Components and Terminology](htt
       "Gid": "string",
       "LogLevel": "string",
       "Mtime": "string",
+      "ObjectTags": "string",
       "OverwriteMode": "string",
       "PosixPermissions": "string",
       "PreserveDeletedFiles": "string",

@@ -1,6 +1,6 @@
 # Infrastructure security in AWS DataSync<a name="infrastructure-security"></a>
 
-As a managed service, AWS DataSync is protected by the AWS global network security procedures\. For more information, see [AWS Best Practices for Security, Identity, and Compliance](https://aws.amazon.com/architecture/security-identity-compliance/)\.
+As a managed service, AWS DataSync is protected by the AWS global network security procedures\. For more information, see [AWS Best Practices for Security, Identity, and Compliance](http://aws.amazon.com/architecture/security-identity-compliance/)\.
 
 You use AWS published API calls to access DataSync through the network\. Clients must support Transport Layer Security \(TLS\) 1\.0 or later\. We recommend TLS 1\.2 or later\. Clients must also support cipher suites with perfect forward secrecy \(PFS\) such as Ephemeral Diffie\-Hellman \(DHE\) or Elliptic Curve Ephemeral Diffie\-Hellman \(ECDHE\)\. Most modern systems such as Java 7 and later support these modes\.
 

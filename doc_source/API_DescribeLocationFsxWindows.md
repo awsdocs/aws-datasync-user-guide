@@ -50,7 +50,7 @@ Type: Timestamp
 The name of the Windows domain that the FSx for Windows File Server belongs to\.  
 Type: String  
 Length Constraints: Maximum length of 253\.  
-Pattern: `^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$` 
+Pattern: `^[A-Za-z0-9]((\.|-+)?[A-Za-z0-9]){0,252}$` 
 
  ** [LocationArn](#API_DescribeLocationFsxWindows_ResponseSyntax) **   <a name="DataSync-DescribeLocationFsxWindows-response-LocationArn"></a>
 The Amazon Resource Name \(ARN\) of the FSx for Windows File Server location that was described\.  
@@ -61,8 +61,8 @@ Pattern: `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0
  ** [LocationUri](#API_DescribeLocationFsxWindows_ResponseSyntax) **   <a name="DataSync-DescribeLocationFsxWindows-response-LocationUri"></a>
 The URL of the FSx for Windows File Server location that was described\.  
 Type: String  
-Length Constraints: Maximum length of 4356\.  
-Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\-]+$` 
+Length Constraints: Maximum length of 4360\.  
+Pattern: `^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\-]+$` 
 
  ** [SecurityGroupArns](#API_DescribeLocationFsxWindows_ResponseSyntax) **   <a name="DataSync-DescribeLocationFsxWindows-response-SecurityGroupArns"></a>
 The Amazon Resource Names \(ARNs\) of the security groups that are configured for the FSx for Windows File Server file system\.  

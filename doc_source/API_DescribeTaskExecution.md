@@ -50,6 +50,7 @@ Required: Yes
       "Gid": "string",
       "LogLevel": "string",
       "Mtime": "string",
+      "ObjectTags": "string",
       "OverwriteMode": "string",
       "PosixPermissions": "string",
       "PreserveDeletedFiles": "string",

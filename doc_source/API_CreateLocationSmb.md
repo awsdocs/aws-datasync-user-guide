@@ -42,7 +42,7 @@ Required: Yes
 The name of the Windows domain that the SMB server belongs to\.  
 Type: String  
 Length Constraints: Maximum length of 253\.  
-Pattern: `^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$`   
+Pattern: `^[A-Za-z0-9]((\.|-+)?[A-Za-z0-9]){0,252}$`   
 Required: No
 
  ** [MountOptions](#API_CreateLocationSmb_RequestSyntax) **   <a name="DataSync-CreateLocationSmb-request-MountOptions"></a>
@@ -82,7 +82,7 @@ Required: No
 
  ** [User](#API_CreateLocationSmb_RequestSyntax) **   <a name="DataSync-CreateLocationSmb-request-User"></a>
 The user who can mount the share, has the permissions to access files and folders in the SMB share\.  
-For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see [user](create-smb-location.html#SMBuser)\.  
+For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see the [User setting](create-smb-location.html#SMBuser) for SMB locations\.  
 Type: String  
 Length Constraints: Maximum length of 104\.  
 Pattern: `^[^\x5B\x5D\\/:;|=,+*?]{1,104}$`   
